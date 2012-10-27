@@ -30,13 +30,13 @@ class Facebook extends Hackathon_Socialcommerce_Model_Abstract
         //create message with token gained before
         $post = array(
             'access_token' => $token,
-            'message'      => 'MESSAGE', /// @todo MESSAGE
-            'link' => 'LINK',   /// @todo LINK
-            'caption' => 'CAPTION', /// @todo caption
+            'message'      => $post->getText(),
+            'link'         => $post->getLink(),
+            'caption'      => $post->getCaption(),
         );
 
         //and make the request
-        $path = "/" . $this->_getConfig()->getFacebookUserId() . "/feed";
+        $path   = "/" . $this->_getConfig()->getFacebookUserId() . "/feed";
         $postId = $facebook->api($path, 'POST', $post);
     }
 

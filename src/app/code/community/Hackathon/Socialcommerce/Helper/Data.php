@@ -81,6 +81,10 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
                 Mage::getStoreConfig('socialcommerce/bitly/password'));
     }
 
+    public function getMessageNewProduct() {
+        return Mage::getStoreConfig('socialcommerce/messages/new_product');
+    }
+
     /**
      * Get a short url string from a long one thanks to external service
      *

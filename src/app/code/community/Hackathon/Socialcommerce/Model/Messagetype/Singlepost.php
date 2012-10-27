@@ -3,7 +3,7 @@
 /**
  * Defines a single post
  */
-class Hackathon_Socialcommerce_Model_Messagetype_Singlepost
+class Hackathon_Socialcommerce_Model_Messagetype_Singlepost extends Hackathon_Socialcommerce_Model_Abstract
 {
 
     /**
@@ -16,7 +16,18 @@ class Hackathon_Socialcommerce_Model_Messagetype_Singlepost
     protected $_picture;
 
     /**
+     * @var string
+     */
+    protected $_link;
+
+    /**
+     * @var string
+     */
+    protected $_caption;
+
+    /**
      * Add a picture
+     *
      * @param string $picture
      */
     public function setPicture ( $picture )
@@ -48,5 +59,52 @@ class Hackathon_Socialcommerce_Model_Messagetype_Singlepost
         return $this->_text;
     }
 
+    /**
+     * @param string $caption
+     */
+    public function setCaption ( $caption )
+    {
+        $this->_caption = $caption;
+    }
 
+    /**
+     * @return string
+     */
+    public function getCaption ()
+    {
+        return $this->_caption;
+    }
+
+    /**
+     * @param string $link
+     */
+    public function setLink ( $link )
+    {
+        $this->_link = $link;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLink ()
+    {
+        return $this->_link;
+    }
+
+    public function importProduct ( Mage_Catalog_Model_Product $product )
+    {
+        $name = $product->getName();
+        $link = $product->getProductUrl();
+
+        $map = array(
+            ":name" => $name,
+            ":link" => $link,
+        );
+
+        $text = strtr($this->getText(), $map);
+
+        $this->setText($text);
+        $this->setCaption($name);
+        $this->setLink($link);
+    }
 }

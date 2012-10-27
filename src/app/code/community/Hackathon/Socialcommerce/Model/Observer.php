@@ -1,6 +1,6 @@
 <?php
 
-class Hackathon_Socialcommerce_Model_Observer
+class Hackathon_Socialcommerce_Model_Observer extends Hackathon_Socialcommerce_Model_Abstract
 {
 
     /**
@@ -19,7 +19,8 @@ class Hackathon_Socialcommerce_Model_Observer
 
             /** @var $post Hackathon_Socialcommerce_Model_Messagetype_Singlepost */
             $post = Mage::getModel('socialcommerce/messagetype_singlepost');
-            $post->setText("Nochmal ein neues Produkt :)");
+            $post->setText($this->_getConfig()->getMessageNewProduct());
+            $post->importProduct($product);
 
             /** @var $twitter Hackathon_Socialcommerce_Model_Adapter_Twitter */
             $twitter = Mage::getModel('socialcommerce/adapter_twitter');
