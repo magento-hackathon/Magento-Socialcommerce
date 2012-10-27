@@ -91,6 +91,11 @@ class Hackathon_Socialcommerce_Model_Messagetype_Singlepost extends Hackathon_So
         return $this->_link;
     }
 
+    /**
+     * Import a Magento Product
+     *
+     * @param Mage_Catalog_Model_Product $product
+     */
     public function importProduct ( Mage_Catalog_Model_Product $product )
     {
         $name = $product->getName();
