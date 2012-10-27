@@ -1,0 +1,8 @@
+.vagrant/.vagrant
+*.cache.properties
+.buildpath
+.settings/**/*
+/.externalToolBuilders
+/build.properties
+/.settings
+.idea
