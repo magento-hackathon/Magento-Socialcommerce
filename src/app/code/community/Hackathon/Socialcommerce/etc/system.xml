@@ -51,7 +51,6 @@
                         </new_product>
                     </fields>
                 </messages>
-				<urlshortener translate="label" module="socialcommerce">
                 <urlshortener translate="label" module="socialcommerce">
                     <label>URL Shortener</label>
                     <sort_order>1</sort_order>
@@ -70,25 +69,6 @@
                         </service>
                     </fields>
                 </urlshortener>
-				<urlshortenerservice_bitly translate="label" module="socialcommerce">
-					<label>Bitly Configuration</label>
-					<frontend_type>text</frontend_type>
-					<sort_order>10</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>1</show_in_website>
-					<show_in_store>1</show_in_store>
-					<comment><![CDATA[Provide here the API information provided by Bitly.com. Check the <a href="http://dev.bitly.com">API documentation</a>]]></comment>
-					<fields>
-						<login translate="label" module="socialcommerce">
-							<label>Username</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</login>
-						<apiKey translate="label" module="socialcommerce">
-							<label>apiKey</label>
                 <urlshortenerservice_bitly translate="label" module="socialcommerce">
                     <label>Bitly Configuration</label>
                     <frontend_type>text</frontend_type>
@@ -114,21 +94,6 @@
 						</apiKey>
 					</fields>
 				</urlshortenerservice_bitly>
-				<twitter translate="label">
-					<label>Twitter Configuration</label>
-					<frontend_type>text</frontend_type>
-					<sort_order>20</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>1</show_in_website>
-					<show_in_store>1</show_in_store>
-					<comment><![CDATA[Provide here the API information provided by Twitter. Check the <a href="https://dev.twitter.com">API documentation</a>]]></comment>
-					<fields>
-                            <sort_order>20</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                        </apiKey>
-                    </fields>
-                </urlshortenerservice_bitly>
                 <twitter translate="label">
                     <label>Twitter Configuration</label>
                     <frontend_type>text</frontend_type>
@@ -208,13 +173,6 @@
 						</token_secret>
 					</fields>
 				</twitter>
-                            <sort_order>40</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </token_secret>
-                    </fields>
-                </twitter>
                 <facebook translate="label">
                     <label>Facebook Configuration</label>
                     <frontend_type>text</frontend_type>
@@ -299,8 +257,5 @@
                 </delicious>
 			</groups>
 		</socialcommerce>
-	</sections>
-            </groups>
-        </socialcommerce>
     </sections>
 </config>
