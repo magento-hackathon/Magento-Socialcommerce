@@ -37,4 +37,18 @@
 			</socialcommerce_setup>
 		</resources>
 	</global>
+
+    <adminhtml>
+        <events>
+            <catalog_product_save_before>
+                <observers>
+                    <socialcommerce_catalog_product_save_before>
+                        <type>singleton</type>
+                        <class>socialcommerce/observer</class>
+                        <method>onCatalogProductSaveBefore</method>
+                    </socialcommerce_catalog_product_save_before>
+                </observers>
+            </catalog_product_save_before>
+        </events>
+    </adminhtml>
 </config>
