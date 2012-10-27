@@ -1,9 +1,20 @@
 #!/bin/bash
 # init Project
 
+### Custom Settings #################################
+
+    version="1.7.0.2"
+	magentoVersion="magento-${version}"
+	magentoUrl="http://www.magentocommerce.com/getmagento/${version}/${magentoVersion}.tar.gz"
+	magentoTarball="/opt/vagrant/files/${magentoVersion}.tar.gz"
+	
+	magentoSampledataVersion="1.6.1.0"
+	magentoSampledata="magento-sample-data-${magentoSampledataVersion}"
+	magentoSampledataUrl="http://www.magentocommerce.com/getmagento/${magentoSampledataVersion}/${magentoSampledata}.tar.gz"
+	magentoSampledataTarball="/opt/vagrant/files/${magentoSampledata}.tar.gz"
+	
 ### Settings #################################
 	mysql=`which mysql`
-	magentoVersion="magento-1.7.0.2"
 	dbrootuser="root"
 	dbrootpass="vagrant"
 	dbhost="localhost"
@@ -97,48 +108,70 @@ echo [+] init ${magentoVersion}
 		arr=($(echo ${magentoVersion} | tr "-" " "));
 		dbuser=$(echo ${arr[@]:0:$((${#arr[@]}-1))} | tr " " "-")
 		dbuser=${dbuser:0:16} # shorten string to please mysql
-		echo [+] current mysqluser: ${dbuser}
 	fi
 	
-### Installer: Database ########################
-	echo "[+] prepare Database"
-
-	$mysql -h ${dbhost} -u${dbrootuser} -p${dbrootpass} -e "DROP DATABASE IF EXISTS \`${dbname}\`;" 2>/dev/null; if [ "$?" -ne 0 ]; then echo "FATAL ERROR: We got a problem running a privileged command in mysql. Please take care that user \"${dbrootuser}\" may issue the DROP DATABASE command @${dbhost}"; exit 255; fi
-	echo "[+] drop Database if exists ${dbname}"
-	
-	$mysql -h ${dbhost} -u${dbrootuser} -p${dbrootpass} -e "CREATE DATABASE \`${dbname}\`;" 2>/dev/null; if [ "$?" -ne 0 ]; then echo "FATAL ERROR: We got a problem running a privileged command in mysql. Please take care that user \"${dbrootuser}\" may issue the CREATE DATABASE command @${dbhost}."; exit 255; fi
-	echo "[+] create Database ${dbname}"
-	
-	$mysql -h ${dbhost} -u${dbrootuser} -p${dbrootpass} -e "GRANT ALL ON *.* TO '${dbuser}'@'localhost' IDENTIFIED BY '${dbpass}';" 2>&1>/dev/null; if [ "$?" -ne 0 ]; then echo "FATAL ERROR: We got a problem running a privileged command in mysql. Please take care that user \"${dbrootuser}\" may issue the GRANT command @${dbhost}."; exit 255; fi
-	echo "[+] grant all on ${dbuser}"
-	
-	$mysql -h ${dbhost} -u${dbrootuser} -p${dbrootpass} -e "FLUSH PRIVILEGES;" 2>/dev/null; if [ "$?" -ne 0 ]; then echo "FATAL ERROR: We got a problem running a privileged command in mysql. Please take care that user \"${dbrootuser}\" may issue the FLUSH PRIVILEGES command @${dbhost}."; exit 255; fi
-	echo "[+] flush privileges"
-
 #########Install ####################################################
 
-	tarball="/usr/local/src/vagrant/files/${magentoVersion}.tar.gz"
 	wwwroot="/var/www/${magentoVersion}"
+
+	if ( [ -f ${magentoTarball} ] && [ ! -d ${wwwroot} ] ); then
+		
+		if ( [ ! -f ${magentoTarball} ] ); then
+			echo "[+] magento hates directdownloads :-( put ${magentoVersion}.tar.gz in the .vagrant/files/ folder"
+			#download ${magentoTarball} ${magentoUrl}
+			exit;
+		fi
+		
+		if ( [ ! -f ${magentoSampledataTarball} ] ); then
+			echo "[+] magento hates directdownloads :-( put ${magentoSampledata}.tar.gz in the .vagrant/files/ folder"
+			#download ${magentoTarball} ${magentoUrl}
+			exit;
+		fi	
+		
+		echo [+] install: ${wwwroot}
+		echo [+] magentoTarball: ${magentoTarball}
+		
+### Installer: Database ########################
+		echo "[+] prepare Database"
 	
-	echo [+] install: ${wwwroot}
-	echo [+] tarball: ${tarball}
-	
-	if ( [ -d ${wwwroot} ] ); then
-		echo [-] ${wwwroot} exists. cleaning up.
-		rm -rf ${wwwroot}
-	fi
-	
-	mkdir ${wwwroot}
-	
-	if ( [ -f ${tarball} ] && [ -d ${wwwroot} ] ); then
+		$mysql -h ${dbhost} -u${dbrootuser} -p${dbrootpass} -e "DROP DATABASE IF EXISTS \`${dbname}\`;" 2>/dev/null; if [ "$?" -ne 0 ]; then echo "FATAL ERROR: We got a problem running a privileged command in mysql. Please take care that user \"${dbrootuser}\" may issue the DROP DATABASE command @${dbhost}"; exit 255; fi
+		echo "[+] drop Database if exists ${dbname}"
+		
+		$mysql -h ${dbhost} -u${dbrootuser} -p${dbrootpass} -e "CREATE DATABASE \`${dbname}\`;" 2>/dev/null; if [ "$?" -ne 0 ]; then echo "FATAL ERROR: We got a problem running a privileged command in mysql. Please take care that user \"${dbrootuser}\" may issue the CREATE DATABASE command @${dbhost}."; exit 255; fi
+		echo "[+] create Database ${dbname}"
+		
+		$mysql -h ${dbhost} -u${dbrootuser} -p${dbrootpass} -e "GRANT ALL ON *.* TO '${dbuser}'@'localhost' IDENTIFIED BY '${dbpass}';" 2>&1>/dev/null; if [ "$?" -ne 0 ]; then echo "FATAL ERROR: We got a problem running a privileged command in mysql. Please take care that user \"${dbrootuser}\" may issue the GRANT command @${dbhost}."; exit 255; fi
+		echo "[+] grant all on ${dbuser}"
+		
+		$mysql -h ${dbhost} -u${dbrootuser} -p${dbrootpass} -e "FLUSH PRIVILEGES;" 2>/dev/null; if [ "$?" -ne 0 ]; then echo "FATAL ERROR: We got a problem running a privileged command in mysql. Please take care that user \"${dbrootuser}\" may issue the FLUSH PRIVILEGES command @${dbhost}."; exit 255; fi
+		echo "[+] flush privileges"
+
+### Installer: Magento ########################
+
+		mkdir ${wwwroot}
 		echo [+] unpack live shop into ${wwwroot}
-		tar --strip-components=1 -xf ${tarball} -C ${wwwroot}
+		tar --strip-components=1 -xf ${magentoTarball} -C ${wwwroot}
 		echo [+] preparing rights
 		sudo chmod o+w ${wwwroot}/var ${wwwroot}/var/.htaccess ${wwwroot}/app/etc
 		sudo chmod -R 775 ${wwwroot}/media ${wwwroot}/var     
 		sudo chown vagrant:www-data ${wwwroot}/* -R	
 		
 		echo "[+] Installing Magento"
+		
+		### Installer: Sampledata ########################
+	
+		if ( [ -f ${magentoSampledataTarball} ] ); then
+			tar --strip-components=1 -xf ${magentoSampledataTarball} -C ${wwwroot}
+			mv ${wwwroot}/magento_sample_data_for_${magentoSampledataVersion}.sql ${wwwroot}/data.sql
+			
+			if ( [ -f ${wwwroot}/data.sql ] ); then
+				$mysql -h ${dbhost} -u${dbrootuser} -p${dbrootpass} ${dbname} < ${wwwroot}/data.sql 2>/dev/null; if [ "$?" -ne 0 ]; then echo "WARNING: We got a problem running a command in mysql. Please take care that user \"${dbuser}\" may issue the INSERT command on database ${dbname}@${dbhost}."; fi
+				rm ${wwwroot}/data.sql
+				echo "[+] installed sample data"
+			else
+				echo "[-] sample data ${wwwroot}/data.sql not found"
+			fi
+		fi
 	
 		cd ${wwwroot}/
 		echo "[+] calling magento installer"
@@ -162,21 +195,11 @@ echo [+] init ${magentoVersion}
 		       --admin_email "info@flagbit.de" \
 		       --admin_username "admin" \
 		       --admin_password "vagrant1"
-		echo "Magento successfully installed at ${url}"
-		
-		echo -n "[+] downloading and extracting Sample-Data ... "
-		download ${wwwroot}/magento-sample-data-1.2.0.tar.gz http://www.magentocommerce.com/downloads/assets/1.2.0/magento-sample-data-1.2.0.tar.gz
-		tar -zxf ${wwwroot}/magento-sample-data-1.2.0.tar.gz -C ${wwwroot}
-		mv ${wwwroot}/magento-sample-data-1.2.0/media/* ${wwwroot}/${version}/media/
-		mv ${wwwroot}/magento-sample-data-1.2.0/magento_sample_data_for_1.2.0.sql ${wwwroot}/${version}/data.sql
-		
-		$mysql -h ${dbhost} -u "${dbuser}" -p${dbpass} ${dbname} < ${wwwroot}/data.sql 2>/dev/null; if [ "$?" -ne 0 ]; then echo "WARNING: We got a problem running a command in mysql. Please take care that user \"${dbuser}\" may issue the INSERT command on database ${dbname}@{$dbhost}."; fi
-		rm ${wwwroot}/data.sql
-		echo "done"
+	
 	fi
-
-
-
+	
+	echo "[+] Have fun with vagrant and Magento at ${url}"
+	
  
 
 

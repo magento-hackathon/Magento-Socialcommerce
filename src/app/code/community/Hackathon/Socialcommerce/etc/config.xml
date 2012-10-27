@@ -7,7 +7,11 @@
 	</modules>
 
 	<default>
-
+		<socialcommerce>
+			<urlshortener>
+				<service>bitly</service>
+			</urlshortener>
+		</socialcommerce>
 	</default>
 
 	<global>
@@ -34,7 +38,22 @@
 				<setup>
 					<module>Hackathon_Socialcommerce</module>
 				</setup>
+				<connection>
+                    <use>core_setup</use>
+                </connection>
 			</socialcommerce_setup>
+
+            <socialcommerce_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </socialcommerce_write>
+
+            <socialcommerce_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </socialcommerce_read>
 		</resources>
 	</global>
 

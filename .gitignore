@@ -7,3 +7,4 @@
 /.settings
 .idea
 .project
+.vagrant/files
