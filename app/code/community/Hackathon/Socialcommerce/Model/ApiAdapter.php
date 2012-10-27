@@ -1,6 +1,6 @@
 <?php
 
-class Hackathon_Social_Model_ApiAdapter
+class Hackathon_Socialcommerce_Model_ApiAdapter
 {
     function __construct() {
 

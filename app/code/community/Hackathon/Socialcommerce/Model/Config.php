@@ -1,6 +1,6 @@
 <?php
 
-class Hackathon_Social_Model_Config
+class Hackathon_Socialcommerce_Model_Config
 {
     public function getTwitterUsername() {
         return "hackathon-dummy";
