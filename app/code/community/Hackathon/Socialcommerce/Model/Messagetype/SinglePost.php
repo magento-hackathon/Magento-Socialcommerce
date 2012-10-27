@@ -1,6 +1,6 @@
 <?php
 
-class Hackathon_Socialcommerce_Model_SinglePost
+class Hackathon_Socialcommerce_Model_Messagetype_SinglePost
 {
 
     /**
