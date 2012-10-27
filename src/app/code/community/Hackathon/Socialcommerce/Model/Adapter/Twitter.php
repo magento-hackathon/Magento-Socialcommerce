@@ -17,7 +17,7 @@ class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcom
      *
      * @param Hackathon_Socialcommerce_Model_Messagetype_SinglePost $post
      */
-    public function sendSinglePost ( Hackathon_Socialcommerce_Model_Messagetype_SinglePost $post )
+    public function sendSinglePost ( Hackathon_Socialcommerce_Model_Messagetype_Singlepost $post )
     {
 
 
