@@ -8,12 +8,12 @@ class Hackathon_Socialcommerce_Model_Adapter_Delicious extends Hackathon_Socialc
 {
 
     /**
-     * @var Zend_Service_Twitter
+     * @var Zend_Service_Delicious
      */
     protected $_client;
 
     /**
-     * Send a single post to twitter
+     * Send a single post to delicious
      *
      * @param Hackathon_Socialcommerce_Model_Messagetype_SinglePost $post
      */
@@ -28,7 +28,7 @@ class Hackathon_Socialcommerce_Model_Adapter_Delicious extends Hackathon_Socialc
     }
 
     /**
-     * Get the twitter client
+     * Get the delicious client
      *
      * @return Zend_Service_Delicious
      */

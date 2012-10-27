@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Composite Pattern for Adapter
+ *
+ */
 class Hackathon_Socialcommerce_Model_AdapterComposite implements Hackathon_Social_Model_Adapter_Interface
 {
 
