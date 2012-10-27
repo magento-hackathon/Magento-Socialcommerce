@@ -7,6 +7,6 @@ class Hackathon_Socialcommerce_Model_Abstract extends Varien_Object
      */
     protected function _getConfig ()
     {
-        return Mage::getHelper('socialcommerce/data');
+        return Mage::helper('socialcommerce/data');
     }
 }
