@@ -5,7 +5,7 @@ Vagrant::Config.run do |config|
         config.ssh.host = "127.0.0.1"
         config.vm.forward_port 22, 2222, :auto => true
         config.vm.forward_port 80, 8080, :auto => true
-        config.vm.share_folder "vagrant", "/usr/local/src/vagrant/", "../.vagrant/"
+        config.vm.share_folder "vagrant", "/opt/vagrant/", "../.vagrant/"
         config.vm.customize ["modifyvm", :id, "--memory", 2048]
-        config.vm.customize ["modifyvm", :id, "--name", "Magento SocialCommerce"]
+        config.vm.customize ["modifyvm", :id, "--name", "Magento-FeltInLoveWithVagrant"]
 end

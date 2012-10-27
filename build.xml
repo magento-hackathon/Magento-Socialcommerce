@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Magento-SocialCommerce" basedir=".">
+<project name="Magento-FeltInLoveWithVagrant" basedir=".">
  
 	<property file="build.properties"/>
 	<property file="build.default.properties"/>
 	<property name="srcdir" value="${basedir}/src"/>
 	<property name="vagrantdir" value="${basedir}/.vagrant"/>
-
-	<taskdef name="antform" classname="com.sardak.antform.AntForm"/>
 
     <target name="rebuild_cache">
     <concat destfile=".IGNOREME">
@@ -23,76 +21,51 @@
     </concat>
 	</target>
 	
-	   <target name="vagrant_init">
-	          <exec dir="${vagrantdir}" executable="cmd">
-	              <arg line="/c vagrant init ${vagrant.basebox}"/>
-	          </exec>
-	          <exec dir="${vagrantdir}" executable="cmd">
-	              <arg line="/c vagrant up"/>
-	          </exec>
-	    </target>
+   <target name="vagrant_init">
+          <exec dir="${vagrantdir}" executable="${vagrant.cmd}">
+              <arg line="${vagrant.path} vagrant init ${vagrant.basebox}"/>
+          </exec>
+          <exec dir="${vagrantdir}" executable="${vagrant.cmd}">
+              <arg line="${vagrant.path} vagrant up"/>
+          </exec>
+    </target>
 
-	    <target name="vagrant_up">
-	          <exec dir="${vagrantdir}" executable="cmd">
-	              <arg line="/c vagrant up"/>
-	          </exec>
-	    </target>
-	 
-	    <target name="vagrant_reload">
-	          <exec dir="${vagrantdir}" executable="cmd">
-	              <arg line="/c vagrant reload"/>
-	          </exec>
-	    </target>
-	    
-	    <target name="vagrant_suspend">
-	          <exec dir="${vagrantdir}" executable="cmd">
-	              <arg line="/c vagrant halt"/>
-	          </exec>
-	    </target>
-	    
-	    <target name="vagrant_resume">
-	          <exec dir="${vagrantdir}" executable="cmd">
-	              <arg line="/c vagrant halt"/>
-	          </exec>
-	    </target>
-
-	    <target name="vagrant_halt">
-	          <exec dir="${vagrantdir}" executable="cmd">
-	              <arg line="/c vagrant halt"/>
-	          </exec>
-	    </target>
-	
-	<target name="deploy_to_live">
-		<antcall target="deploy_scp">
-			<param name="transfer.user" value="${transfer.live.user}"/>
-		    <param name="transfer.server" value="${transfer.live.server}"/>
-		  	<param name="transfer.path" value="${transfer.live.path}"/>
-		  	<param name="transfer.cache" value="${transfer.live.cache}"/>
-		  	<param name="transfer.keyfile"  value="${transfer.live.keyfile}"/>
-		</antcall>
-	</target>
-
-	<target name="deploy_to_dev">
-		<antcall target="deploy_scp">
-			<param name="transfer.user" value="${transfer.dev.user}"/>
-		    <param name="transfer.server" value="${transfer.dev.server}"/>
-		  	<param name="transfer.path" value="${transfer.dev.path}"/>
-		  	<param name="transfer.cache" value="${transfer.dev.cache}"/>
-		  	<param name="transfer.keyfile"  value="${transfer.dev.keyfile}"/>
-		</antcall>
-	</target>
+    <target name="vagrant_up">
+          <exec dir="${vagrantdir}" executable="${vagrant.cmd}">
+              <arg line="${vagrant.path} vagrant up"/>
+          </exec>
+    </target>
  
-	<target name="deploy_scp">
-		<antform title="SSH-Key Authentification required">
-			<label>Please enter your Passphrase for Key ${transfer.keyfile}</label>
-			<textProperty label="Passphrase:" property="userPass"
-				required="true" password="true" />
-		</antform>
-    	<scp
+    <target name="vagrant_reload">
+          <exec dir="${vagrantdir}" executable="${vagrant.cmd}">
+              <arg line="${vagrant.path} vagrant reload"/>
+          </exec>
+    </target>
+    
+    <target name="vagrant_suspend">
+          <exec dir="${vagrantdir}" executable="${vagrant.cmd}">
+              <arg line="${vagrant.path} vagrant halt"/>
+          </exec>
+    </target>
+    
+    <target name="vagrant_resume">
+          <exec dir="${vagrantdir}" executable="${vagrant.cmd}">
+              <arg line="${vagrant.path} vagrant halt"/>
+          </exec>
+    </target>
+
+    <target name="vagrant_halt">
+          <exec dir="${vagrantdir}" executable="${vagrant.cmd}">
+              <arg line="${vagrant.path} vagrant halt"/>
+          </exec>
+    </target>
+	
+	<target name="deploy">
+		<scp
     		remoteTodir="${transfer.user}@${transfer.server}:${transfer.path}"
-            keyfile="${transfer.keyfile}"
-    		passphrase="${userPass}"
+    		password="${transfer.password}"
             trust="true"
+			port="${transfer.port}"
             verbose="true"
             >
 	        <fileset dir="src">
@@ -101,24 +74,16 @@
 	            	 <param name="cache.cachefile" value="${transfer.cache}.cache.properties"/>
 	            </modified>
 	            <exclude name="**/.svn"/>
-	            <exclude name=".buildpath"/>
-	            <exclude name=".project"/>
-	            <exclude name=".vagrant"/>
-	            <exclude name=".settings/**"/>
-	        	<exclude name=".cache/**"/>
-				<exclude name=".git/**"/>
-	        	<exclude name="webserver/**"/>
-	        	<exclude name=".externalToolBuilders/**"/>
 	            <exclude name="downloader/**"/>
 	        	<exclude name="pear"/>
 	            <exclude name="*cache.properties"/>
 	            <exclude name="build.default.properties"/>
 	            <exclude name="build.properties"/>
 	            <exclude name="build.xml"/>
-	            <exclude name="TODO"/>
 	        	<exclude name="var/**" />
 	        	<exclude name="Thumbs.db" />
 	        </fileset>
 	    </scp>
 	</target>
+
 </project>

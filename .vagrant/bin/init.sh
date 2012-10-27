@@ -6,12 +6,12 @@
     version="1.7.0.2"
 	magentoVersion="magento-${version}"
 	magentoUrl="http://www.magentocommerce.com/getmagento/${version}/${magentoVersion}.tar.gz"
-	magentoTarball="/usr/local/src/vagrant/files/${magentoVersion}.tar.gz"
+	magentoTarball="/opt/vagrant/files/${magentoVersion}.tar.gz"
 	
 	magentoSampledataVersion="1.6.1.0"
 	magentoSampledata="magento-sample-data-${magentoSampledataVersion}"
 	magentoSampledataUrl="http://www.magentocommerce.com/getmagento/${magentoSampledataVersion}/${magentoSampledata}.tar.gz"
-	magentoSampledataTarball="/usr/local/src/vagrant/files/${magentoSampledata}.tar.gz"
+	magentoSampledataTarball="/opt/vagrant/files/${magentoSampledata}.tar.gz"
 	
 ### Settings #################################
 	mysql=`which mysql`
