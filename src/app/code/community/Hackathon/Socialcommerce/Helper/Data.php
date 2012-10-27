@@ -85,6 +85,10 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfig('socialcommerce/messages/new_product');
     }
 
+    public function isTwitterEnabled() {
+        return (1 == Mage::getStoreConfig('socialcommerce/twitter/active'));
+    }
+
     /**
      * Get a short url string from a long one thanks to external service
      *
