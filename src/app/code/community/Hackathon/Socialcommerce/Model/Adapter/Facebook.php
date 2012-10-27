@@ -28,7 +28,7 @@ class Facebook extends Hackathon_Socialcommerce_Model_Abstract
         }
 
         //create message with token gained before
-        $post = array(
+        $apiPost = array(
             'access_token' => $token,
             'message'      => $post->getText(),
             'link'         => $post->getLink(),
@@ -37,7 +37,7 @@ class Facebook extends Hackathon_Socialcommerce_Model_Abstract
 
         //and make the request
         $path   = "/" . $this->_getConfig()->getFacebookUserId() . "/feed";
-        $postId = $facebook->api($path, 'POST', $post);
+        $postId = $facebook->api($path, 'POST', $apiPost);
     }
 
     /**
