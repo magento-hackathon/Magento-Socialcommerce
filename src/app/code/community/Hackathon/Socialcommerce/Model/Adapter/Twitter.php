@@ -4,7 +4,7 @@
  * Adapter
  */
 class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcommerce_Model_Abstract
-    implements Hackathon_Social_Model_Adapter_Interface
+    implements Hackathon_Socialcommerce_Model_Adapter_Interface
 {
 
     /**

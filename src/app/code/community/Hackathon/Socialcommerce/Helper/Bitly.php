@@ -26,45 +26,53 @@
  */
 
 /**
- * Social Commerce Data Helper
+ * Bitly Helper to shorten urls
  *
  * @category Hackathon
  * @package Hackathon_Socialcommerce
  * @author Sylvain Rayé <sylvain.raye@gmail.com>
  */
-class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
+class Hackathon_Socialcommerce_Model_Adapter_Bitly extends Mage_Core_Helper_Abstract
 {
+	const ENDPOINT_URL = 'https://api-ssl.bitly.com';
 
-    public function getTwitterConsumerKey ()
-    {
-        return Mage::getStoreConfig('socialcommerce/twitter/consumer_key');
-    }
+	private $_token;
 
-    public function getTwitterConsumerSecret ()
-    {
-        return Mage::helper('core')->decrypt(
-                Mage::getStoreConfig('socialcommerce/twitter/consumer_secret'));
-    }
+	public function __construct ()
+	{
+		$this->init();
+		return $this;
+	}
 
-    public function getTwitterAuthToken ()
-    {
-        return Mage::getStoreConfig('socialcommerce/twitter/auth_token');
-    }
+	public function init ()
+	{
+		$helper = Mage::helper('socialcommerce');
 
-    public function getTwitterTokenSecret ()
-    {
-        return Mage::helper('core')->decrypt(
-                Mage::getStoreConfig('socialcommerce/twitter/token_secret'));
-    }
+		$username = $helper->getBitlyUsername();
+		$password = $helper->getBitlyPassword();
 
-    public function getBitlyUsername ()
-    {
-        return Mage::getStoreConfig('socialcommerce/bitly/username');
-    }
+		$tokenUrl = self::ENDPOINT_URL . '/oauth/access_token';
 
-    public function getBitlyPassword ()
+		$config = array(
+				'adapter' => 'Zend_Http_Client_Adapter_Curl',
+				'curl_options' => array (
+						'CURLOPT_URL' => $tokenUrl,
+						'CURLOPT_SSL_VERIFYPEER' => true,
+						'CURLOPT_SSL_VERIFYHOST' => 2,
+						'CURLOPT_FAILONERROR' => true,
+						'CURLOPT_RETURNTRANSFER' => true
+				)
+		);
+
+		$client = new Zend_Http_Client($tokenUrl, $config);
+		$client->setAuth($username, $password);
+		$this->_token = $client->request('POST')->getBody();
+
+		return $this;
+	}
+
+    public function getToken ()
     {
-        return Mage::helper('core')->decrypt(
-                Mage::getStoreConfig('socialcommerce/bitly/password'));
+    	return $this->_token;
     }
 }
