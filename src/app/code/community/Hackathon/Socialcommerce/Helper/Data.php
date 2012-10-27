@@ -89,6 +89,18 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
         return (1 == Mage::getStoreConfig('socialcommerce/twitter/active'));
     }
 
+    public function getDeliciousUsername() {
+        return Mage::getStoreConfig('socialcommerce/delicious/username');
+    }
+
+    public function getDeliciousPassword() {
+        return Mage::getStoreConfig('socialcommerce/delicious/password');
+    }
+
+    public function isDeliciousEnabled() {
+        return (1 == Mage::getStoreConfig('socialcommerce/delicious/active'));
+    }
+
     /**
      * Get a short url string from a long one thanks to external service
      *
