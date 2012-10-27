@@ -38,6 +38,8 @@ class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_So
     protected $_name = 'bit.ly';
 
     /**
+     * Shorten API for bitly
+     * @todo change the legacy API Key protocol to OAuth2 protocol
      *
      * @param string $longUrl
      * @throws Exception
@@ -46,12 +48,22 @@ class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_So
     public function shorten ($longUrl)
     {
         $url = Zend_Uri::factory('http://api.bit.ly/shorten');
-        $url->setQuery(
-                array_merge($this->getConfiguration(),
-                        array(
-                                'format' => 'json',
-                                'longUrl' => $longUrl
-                        )));
+
+        $config = $this->getConfiguration();
+
+        if ($config['apiKey']) {
+            $config['apiKey'] = Mage::helper('core')->decrypt($config['apiKey']);
+        }
+
+        $query = array_merge($config,
+                array(
+                        'format' => 'json',
+                        'longUrl' => $longUrl
+                ));
+
+        Mage::log(Zend_Debug::dump($query, null, false), Zend_Log::DEBUG);
+
+        $url->setQuery($query);
 
         $httpClient = $this->getHttpClient();
         $httpClient->setUri($url);

@@ -11,6 +11,11 @@
 			<urlshortener>
 				<service>bitly</service>
 			</urlshortener>
+			<urlshortenerservice_bitly>
+                <login>hackathon</login>
+                <apiKey></apiKey>
+                <version>2.0.1</version>
+            </urlshortenerservice_bitly>
 		</socialcommerce>
 	</default>
 
@@ -24,7 +29,17 @@
 		<models>
 			<socialcommerce>
 				<class>Hackathon_Socialcommerce_Model</class>
+				<resourceModel>socialcommerce_resource</resourceModel>
 			</socialcommerce>
+
+            <socialcommerce_resource>
+                <class>Hackathon_Socialcommerce_Model_Resource</class>
+                <entities>
+                    <shorturl>
+                        <table>socialcommerce_shorturl</table>
+                    </shorturl>
+                </entities>
+            </socialcommerce_resource>
 		</models>
 
 		<helpers>

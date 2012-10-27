@@ -104,27 +104,28 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Get a short url string from a long one thanks to external service
      *
-     * @param $longurl string
+     * @param $longUrl string
      * @return mixed
      */
-    public function shorten ($longurl)
+    public function shorten ($longUrl)
     {
         $shortUrlModel = Mage::getModel('socialcommerce/shorturl');
-        $shortUrlModel->loadByLongurl($longurl);
+        $shortUrlModel->loadByLongUrl($longUrl);
         if (! $shortUrlModel->getId()) {
 
             $service = $this->getShorturlService();
             try {
-                $shorturl = $service->shorten($longurl);
-                $shortUrlModel->setShorturl($shorturl)
-                    ->setLongurl($longurl)
+                $shortUrl = $service->shorten($longUrl);
+                $shortUrlModel->setShorturl($shortUrl)
+                    ->setLongurl($longUrl)
                     ->setService($service->getName())
                     ->setCreateTime(
                         $shortUrlModel->getResource()
                             ->formatDate(time()))
                     ->save();
             } catch (Exception $e) {
-                $shortUrlModel->setShortUrl($longurl);
+                Mage::logException($e);
+                $shortUrlModel->setShortUrl($longUrl);
             }
         }
         return $shortUrlModel->getShorturl();
@@ -132,10 +133,10 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      *
-     * @return Hackathon_Socialcommerce_Model_Shorturl_Service
+     * @return Hackathon_Socialcommerce_Model_Shorturl_Abstract
      */
-    public function getShorturlService ()
+    public function getShorturlService ($service = null, $configuration = null)
     {
-        return Mage::getModel('socialcommerce/shorturl_service_factory')->create();
+        return Mage::getModel('socialcommerce/shorturl_service_factory')->create($service, $configuration);
     }
 }

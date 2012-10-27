@@ -35,6 +35,10 @@
 class Hackathon_Socialcommerce_Model_Shorturl extends Mage_Core_Model_Abstract
 {
 
+    protected $_eventPrefix = 'socialcommerce_shorturl';
+
+    protected $_eventObject = 'shorturl';
+
     public function _construct ()
     {
         $this->_init('socialcommerce/shorturl');
@@ -42,8 +46,9 @@ class Hackathon_Socialcommerce_Model_Shorturl extends Mage_Core_Model_Abstract
     }
 
     /**
+     * Get ShortUrl Object from LongUrl
      *
-     * @param string $longurl
+     * @param string $longUrl
      *
      * @return Hackathon_Socialcommerce_Model_Shorturl
      */

@@ -1,0 +1,2 @@
+### Bitly Configuration
+To enable bitly go to Magento Backend > System > Configuration >  Social Commerce > Bitly Configuration > login and apiKey. This is credential for the legacy API at the moment that you can get from <a href="http://dev.bitly.com/">bitly</a>

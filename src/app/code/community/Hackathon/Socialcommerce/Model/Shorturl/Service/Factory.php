@@ -46,15 +46,15 @@ class Hackathon_Socialcommerce_Model_Shorturl_Service_Factory
         if (is_null($service)) {
             $service = Mage::getStoreConfig('socialcommerce/urlshortener/service');
         }
+
         if (is_null($configuration)) {
             $configuration = Mage::getStoreConfig('socialcommerce/urlshortenerservice_' . $service);
         }
+
         $shortUrlService = Mage::getModel('socialcommerce/shorturl_service_' . $service);
         if ($shortUrlService) {
             $shortUrlService->setConfiguration($configuration);
         }
         return $shortUrlService;
-
     }
-
 }
