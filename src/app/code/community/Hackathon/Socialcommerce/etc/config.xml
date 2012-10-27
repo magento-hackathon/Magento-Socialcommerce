@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Hackathon_Socialcommerce>
+			<version>1.0.0</version>
+		</Hackathon_Socialcommerce>
+	</modules>
+
+	<default>
+
+	</default>
+
+	<global>
+		<blocks>
+			<socialcommerce>
+				<class>Hackathon_Socialcommerce_Block</class>
+			</socialcommerce>
+		</blocks>
+
+		<models>
+			<socialcommerce>
+				<class>Hackathon_Socialcommerce_Model</class>
+			</socialcommerce>
+		</models>
+
+		<helpers>
+			<socialcommerce>
+				<class>Hackathon_Socialcommerce_Helper</class>
+			</socialcommerce>
+		</helpers>
+
+		<resources>
+			<socialcommerce_setup>
+				<setup>
+					<module>Hackathon_Socialcommerce</module>
+				</setup>
+			</socialcommerce_setup>
+		</resources>
+	</global>
+</config>
