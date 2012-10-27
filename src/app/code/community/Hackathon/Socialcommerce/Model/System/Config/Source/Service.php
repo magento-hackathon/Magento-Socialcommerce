@@ -42,7 +42,7 @@ class Hackathon_Socialcommerce_Model_System_Config_Source_Service
         if (! $this->_options) {
             $this->_options = array();
             $keyMarker = 'urlshortenerservice_';
-            foreach (Mage::getStoreConfig('hdnet_adminhtml') as $key => $config) {
+            foreach (Mage::getStoreConfig('socialcommerce') as $key => $config) {
                 if (strpos($key, $keyMarker) === 0) {
                     $service = substr($key, strlen($keyMarker));
                     $this->_options[] = array(

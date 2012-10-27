@@ -16,6 +16,7 @@
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>
 			<groups>
+<<<<<<< HEAD
                 <messages translate="label">
                     <label>Default messages</label>
                     <frontend_type>text</frontend_type>
@@ -28,14 +29,34 @@
                         <new_product translate="label ">
                             <label>New product</label>
                             <frontend_type>text</frontend_type>
+=======
+				<urlshortener translate="label" module="socialcommerce">
+                    <label>URL Shortener</label>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <service translate="label" module="socialcommerce">
+                            <label>Service</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>socialcommerce/system_config_source_service</source_model>
+>>>>>>> Add final bitly support
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+<<<<<<< HEAD
                         </new_product>
                     </fields>
                 </messages>
 				<bitly translate="label">
+=======
+                        </service>
+                    </fields>
+                </urlshortener>
+				<urlshortenerservice_bitly translate="label" module="socialcommerce">
+>>>>>>> Add final bitly support
 					<label>Bitly Configuration</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>10</sort_order>
@@ -44,6 +65,7 @@
 					<show_in_store>1</show_in_store>
 					<comment><![CDATA[Provide here the API information provided by Bitly.com. Check the <a href="http://dev.bitly.com">API documentation</a>]]></comment>
 					<fields>
+<<<<<<< HEAD
                         <active translate="label">
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
@@ -54,23 +76,27 @@
                             <show_in_store>1</show_in_store>
                         </active>
 						<username translate="label">
+=======
+						<login translate="label" module="socialcommerce">
+>>>>>>> Add final bitly support
 							<label>Username</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>10</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-						</username>
-						<password translate="label">
-							<label>Password</label>
+						</login>
+						<apiKey translate="label" module="socialcommerce">
+							<label>apiKey</label>
                             <frontend_type>obscure</frontend_type>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
 							<sort_order>20</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-						</password>
+						</apiKey>
 					</fields>
+<<<<<<< HEAD
 				</bitly>
 				<twitter translate="label">
                     <active translate="label">
@@ -82,6 +108,10 @@
                         <show_in_website>1</show_in_website>
                         <show_in_store>1</show_in_store>
                     </active>
+=======
+				</urlshortenerservice_bitly>
+				<twitter translate="label" module="socialcommerce">
+>>>>>>> Add final bitly support
 					<label>Twitter Configuration</label>
 					<frontend_type>text</frontend_type>
 					<sort_order>20</sort_order>
@@ -90,6 +120,7 @@
 					<show_in_store>1</show_in_store>
 					<comment><![CDATA[Provide here the API information provided by Twitter. Check the <a href="https://dev.twitter.com">API documentation</a>]]></comment>
 					<fields>
+<<<<<<< HEAD
                         <active translate="label">
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
@@ -100,6 +131,9 @@
                             <show_in_store>1</show_in_store>
                         </active>
 						<consumer_key translate="label">
+=======
+						<consumer_key translate="label" module="socialcommerce">
+>>>>>>> Add final bitly support
 							<label>Consumer Key</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>10</sort_order>
@@ -107,7 +141,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</consumer_key>
-						<consumer_secret translate="label">
+						<consumer_secret translate="label" module="socialcommerce">
 							<label>Consumer Secret</label>
                             <frontend_type>obscure</frontend_type>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
@@ -116,7 +150,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</consumer_secret>
-						<auth_token translate="label">
+						<auth_token translate="label" module="socialcommerce">
 							<label>Authorization Token</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>30</sort_order>
@@ -124,7 +158,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</auth_token>
-						<token_secret translate="label">
+						<token_secret translate="label" module="socialcommerce">
 							<label>Token Secret Secret</label>
                             <frontend_type>obscure</frontend_type>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
@@ -135,6 +169,7 @@
 						</token_secret>
 					</fields>
 				</twitter>
+<<<<<<< HEAD
                 <facebook translate="label">
                     <active translate="label">
                         <label>Enabled</label>
@@ -145,15 +180,18 @@
                         <show_in_website>1</show_in_website>
                         <show_in_store>1</show_in_store>
                     </active>
+=======
+                <facebook translate="label" module="socialcommerce">
+>>>>>>> Add final bitly support
                     <label>Facebook Configuration</label>
                     <frontend_type>text</frontend_type>
-                    <sort_order>10</sort_order>
+                    <sort_order>30</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>0</show_in_website>
                     <show_in_store>0</show_in_store>
                     <comment><![CDATA[Provide here the API information provided by Facebook. Check the <a href="http://developers.facebook.com/">API documentation</a>]]></comment>
                     <fields>
-                        <user_id translate="label">
+                        <user_id translate="label" module="socialcommerce">
                             <label>User ID</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>10</sort_order>
@@ -161,7 +199,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </user_id>
-                        <secret translate="label">
+                        <secret translate="label" module="socialcommerce">
                             <label>Consumer Secret</label>
                             <frontend_type>obscure</frontend_type>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
@@ -170,7 +208,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </secret>
-                        <app_id translate="label">
+                        <app_id translate="label" module="socialcommerce">
                             <label>App ID</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>30</sort_order>
