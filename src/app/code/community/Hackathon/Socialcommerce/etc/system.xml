@@ -6,22 +6,6 @@
 			<sort_order>400</sort_order>
 		</socialcommerce>
 	</tabs>
-	<sections>
-		<socialcommerce translate="label" module="socialcommerce">
-			<class>separator-top</class>
-			<label>Social Commerce</label>
-			<tab>socialcommerce</tab>
-			<sort_order>10</sort_order>
-			<show_in_default>1</show_in_default>
-			<show_in_website>1</show_in_website>
-			<show_in_store>1</show_in_store>
-			<groups>
-    <tabs>
-        <socialcommerce translate="label" module="socialcommerce">
-            <label>Hackathon</label>
-            <sort_order>400</sort_order>
-        </socialcommerce>
-    </tabs>
     <sections>
         <socialcommerce translate="label" module="socialcommerce">
             <class>separator-top</class>
