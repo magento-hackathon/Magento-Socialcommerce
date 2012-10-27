@@ -23,6 +23,45 @@
     </concat>
 	</target>
 	
+	   <target name="vagrant_init">
+	          <exec dir="${vagrantdir}" executable="cmd">
+	              <arg line="/c vagrant init ${vagrant.basebox}"/>
+	          </exec>
+	          <exec dir="${vagrantdir}" executable="cmd">
+	              <arg line="/c vagrant up"/>
+	          </exec>
+	    </target>
+
+	    <target name="vagrant_up">
+	          <exec dir="${vagrantdir}" executable="cmd">
+	              <arg line="/c vagrant up"/>
+	          </exec>
+	    </target>
+	 
+	    <target name="vagrant_reload">
+	          <exec dir="${vagrantdir}" executable="cmd">
+	              <arg line="/c vagrant reload"/>
+	          </exec>
+	    </target>
+	    
+	    <target name="vagrant_suspend">
+	          <exec dir="${vagrantdir}" executable="cmd">
+	              <arg line="/c vagrant halt"/>
+	          </exec>
+	    </target>
+	    
+	    <target name="vagrant_resume">
+	          <exec dir="${vagrantdir}" executable="cmd">
+	              <arg line="/c vagrant halt"/>
+	          </exec>
+	    </target>
+
+	    <target name="vagrant_halt">
+	          <exec dir="${vagrantdir}" executable="cmd">
+	              <arg line="/c vagrant halt"/>
+	          </exec>
+	    </target>
+	
 	<target name="deploy_to_live">
 		<antcall target="deploy_scp">
 			<param name="transfer.user" value="${transfer.live.user}"/>
