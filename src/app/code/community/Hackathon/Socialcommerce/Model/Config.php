@@ -2,11 +2,19 @@
 
 class Hackathon_Socialcommerce_Model_Config
 {
-    public function getTwitterUsername() {
-        return "hackathon-dummy";
+    public function getTwitterConsumerKey() {
+        return FALSE;
     }
 
-    public function getTwitterPassword() {
-        return "hackathon128";
+    public function getTwitterConsumerSecret() {
+        return FALSE;
+    }
+
+    public function getTwitterAuthToken() {
+        return FALSE;
+    }
+
+    public function getTwitterTokenSecret() {
+        return FALSE;
     }
 }
