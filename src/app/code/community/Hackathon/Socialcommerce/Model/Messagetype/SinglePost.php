@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Defines a single post
+ */
 class Hackathon_Socialcommerce_Model_Messagetype_SinglePost
 {
 
@@ -13,6 +16,7 @@ class Hackathon_Socialcommerce_Model_Messagetype_SinglePost
     protected $_picture;
 
     /**
+     * Add a picture
      * @param string $picture
      */
     public function setPicture ( $picture )
