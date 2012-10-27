@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Hackathon
  *
@@ -24,15 +25,59 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-
 /**
  * Social Commerce Data Helper
  *
- * @category   Hackathon
- * @package    Hackathon_Socialcommerce
- * @author     Sylvain RayŽ
+ * @category Hackathon
+ * @package Hackathon_Socialcommerce
+ * @author Sylvain Rayï¿½ <sylvain.raye@gmail.com>
  */
 class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
+    public function getTwitterConsumerKey ()
+    {
+        return Mage::getStoreConfig('socialcommerce/twitter/consumer_key');
+    }
+
+    public function getTwitterConsumerSecret ()
+    {
+        return Mage::helper('core')->decrypt(
+                Mage::getStoreConfig('socialcommerce/twitter/consumer_secret'));
+    }
+
+    public function getTwitterAuthToken ()
+    {
+        return Mage::getStoreConfig('socialcommerce/twitter/auth_token');
+    }
+
+    public function getTwitterTokenSecret ()
+    {
+        return Mage::helper('core')->decrypt(
+                Mage::getStoreConfig('socialcommerce/twitter/token_secret'));
+    }
+
+    public function getFacebookAppId() {
+        return Mage::getStoreConfig('socialcommerce/facebook/app_id');
+    }
+
+    public function getFacebookSecret() {
+        return Mage::helper('core')->decrypt(
+            Mage::getStoreConfig('socialcommerce/facebook/secret'));
+    }
+
+    public function getFacebookUserId() {
+        return Mage::getStoreConfig('socialcommerce/facebook/user_id');
+    }
+
+    public function getBitlyUsername ()
+    {
+        return Mage::getStoreConfig('socialcommerce/bitly/username');
+    }
+
+    public function getBitlyPassword ()
+    {
+        return Mage::helper('core')->decrypt(
+                Mage::getStoreConfig('socialcommerce/bitly/password'));
+    }
 }
