@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Magento-FeltInLoveWithVagrant" basedir=".">
+<project name="Magento-SocialCommerce" basedir=".">
  
 	<property file="build.properties"/>
 	<property file="build.default.properties"/>
