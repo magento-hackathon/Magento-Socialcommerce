@@ -32,6 +32,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
+							<comment><![CDATA[You can use some template variable: ':name' for the product name, ':link' for the product url.]]></comment>
 						</new_product>
 					</fields>
 				</messages>
@@ -139,10 +140,9 @@
 						</auth_token>
 						<token_secret translate="label">
 							<label>Token Secret Secret</label>
+							<sort_order>40</sort_order>
                             <frontend_type>obscure</frontend_type>
-                     		<backend_model>adminhtml/system_config_backend_encrypted
-                     		</backend_model>
-							<sort_order>20</sort_order>
+                     		<backend_model>adminhtml/system_config_backend_encrypted</backend_model>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
