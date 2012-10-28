@@ -1,239 +1,240 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<tabs>
-		<socialcommerce translate="label" module="socialcommerce">
-			<label>Hackathon</label>
-			<sort_order>400</sort_order>
-		</socialcommerce>
-	</tabs>
-	<sections>
-		<socialcommerce translate="label" module="socialcommerce">
-			<class>separator-top</class>
-			<label>Social Commerce</label>
-			<tab>socialcommerce</tab>
-			<sort_order>10</sort_order>
-			<show_in_default>1</show_in_default>
-			<show_in_website>1</show_in_website>
-			<show_in_store>1</show_in_store>
-			<groups>
-				<messages translate="label">
-					<label>Default messages</label>
-					<frontend_type>text</frontend_type>
-					<sort_order>10</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>1</show_in_website>
-					<show_in_store>1</show_in_store>
-					<comment><![CDATA[These messages will be send to your social networks by default.]]></comment>
-					<fields>
-						<new_product translate="label ">
-							<label>New product</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<comment><![CDATA[You can use some template variable: ':name' for the product name, ':link' for the product url.]]></comment>
-						</new_product>
-					</fields>
-				</messages>
-				<urlshortener translate="label" module="socialcommerce">
-					<label>URL Shortener</label>
-					<sort_order>15</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>1</show_in_website>
-					<show_in_store>1</show_in_store>
-					<fields>
-						<service translate="label" module="socialcommerce">
-							<label>Service</label>
-							<frontend_type>select</frontend_type>
-							<source_model>socialcommerce/system_config_source_service
-							</source_model>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</service>
-					</fields>
-				</urlshortener>
-				<urlshortenerservice_bitly translate="label" module="socialcommerce">
-					<label>Bitly Configuration (URL Shortener)</label>
-					<sort_order>17</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>1</show_in_website>
-					<show_in_store>1</show_in_store>
-					<comment><![CDATA[Provide here the API information provided by Bitly.com. Check the <a href="http://dev.bitly.com">API documentation</a>]]></comment>
-					<fields>
-						<login translate="label" module="socialcommerce">
-							<label>Username</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</login>
-						<password>
-							<label>Password</label>
-							<frontend_type>obscure</frontend_type>
-							<backend_model>adminhtml/system_config_backend_encrypted
-							</backend_model>
-							<sort_order>20</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<comment><![CDATA[If you want to use the new OAuth AIP, fill this field. You won't need to fille the apiKey below.]]></comment>
-						</password>
-						<domain>
-							<label>Domain</label>
-							<frontend_type>select</frontend_type>
-							<source_model>socialcommerce/system_config_source_bitly_domain</source_model>
-							<sort_order>30</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<comment><![CDATA[If you want to use the legacy API fill this field. You won't need the password above.]]></comment>
-						</domain>
-					</fields>
-				</urlshortenerservice_bitly>
-				<twitter translate="label">
-					<label>Twitter Configuration</label>
-					<frontend_type>text</frontend_type>
-					<sort_order>20</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>1</show_in_website>
-					<show_in_store>1</show_in_store>
-					<comment><![CDATA[Provide here the API information provided by Twitter. Check the <a href="https://dev.twitter.com">API documentation</a>]]></comment>
-					<fields>
-						<active translate="label">
-							<label>Enabled</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>1</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</active>
-						<consumer_key translate="label">
-							<label>Consumer Key</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</consumer_key>
-						<consumer_secret translate="label">
-							<label>Consumer Secret</label>
-							<frontend_type>obscure</frontend_type>
-							<backend_model>adminhtml/system_config_backend_encrypted
-							</backend_model>
-							<sort_order>20</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</consumer_secret>
-						<auth_token translate="label">
-							<label>Authorization Token</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>30</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</auth_token>
-						<token_secret translate="label">
-							<label>Token Secret Secret</label>
-							<sort_order>40</sort_order>
+    <tabs>
+        <socialcommerce translate="label" module="socialcommerce">
+            <label>Hackathon</label>
+            <sort_order>400</sort_order>
+        </socialcommerce>
+    </tabs>
+    <sections>
+        <socialcommerce translate="label" module="socialcommerce">
+            <class>separator-top</class>
+            <label>Social Commerce</label>
+            <tab>socialcommerce</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <messages translate="label">
+                    <label>Default messages</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[These messages will be send to your social networks by default.]]></comment>
+                    <fields>
+                        <new_product translate="label ">
+                            <label>New product</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[You can use some template variable: ':name' for the product name, ':link' for the product url.]]></comment>
+                        </new_product>
+                    </fields>
+                </messages>
+                <urlshortener translate="label" module="socialcommerce">
+                    <label>URL Shortener</label>
+                    <sort_order>15</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <service translate="label" module="socialcommerce">
+                            <label>Service</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>socialcommerce/system_config_source_service
+                            </source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </service>
+                    </fields>
+                </urlshortener>
+                <urlshortenerservice_bitly translate="label" module="socialcommerce">
+                    <label>Bitly Configuration (URL Shortener)</label>
+                    <sort_order>17</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[Provide here the API information provided by Bitly.com. Check the <a href="http://dev.bitly.com">API documentation</a>]]></comment>
+                    <fields>
+                        <login translate="label" module="socialcommerce">
+                            <label>Username</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </login>
+                        <password>
+                            <label>Password</label>
                             <frontend_type>obscure</frontend_type>
-                     		<backend_model>adminhtml/system_config_backend_encrypted</backend_model>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</token_secret>
-					</fields>
-				</twitter>
-				<facebook translate="label">
-					<label>Facebook Configuration</label>
-					<frontend_type>text</frontend_type>
-					<sort_order>30</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>0</show_in_website>
-					<show_in_store>0</show_in_store>
-					<comment><![CDATA[Provide here the API information provided by Facebook. Check the <a href="http://developers.facebook.com/">API documentation</a>]]></comment>
-					<fields>
-						<active translate="label">
-							<label>Enabled</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>1</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</active>
-						<user_id translate="label">
-							<label>User ID</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</user_id>
-						<secret translate="label">
-							<label>Consumer Secret</label>
-							<frontend_type>obscure</frontend_type>
-							<backend_model>adminhtml/system_config_backend_encrypted
-							</backend_model>
-							<sort_order>20</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</secret>
-						<app_id translate="label">
-							<label>App ID</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>30</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</app_id>
-					</fields>
-				</facebook>
-				<delicious translate="label">
-					<label>Delicious Configuration</label>
-					<frontend_type>text</frontend_type>
-					<sort_order>40</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>0</show_in_website>
-					<show_in_store>0</show_in_store>
-					<comment><![CDATA[Provide here the API information provided by Facebook. Check the <a href="http://devdelicious.com//">API documentation</a>]]></comment>
-					<fields>
-						<active translate="label">
-							<label>Enabled</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>1</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</active>
-						<username translate="label">
-							<label>Username</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</username>
-						<password translate="label">
-							<label>Consumer Secret</label>
-							<frontend_type>obscure</frontend_type>
-							<backend_model>adminhtml/system_config_backend_encrypted
-							</backend_model>
-							<sort_order>20</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</password>
-					</fields>
-				</delicious>
-			</groups>
-		</socialcommerce>
-	</sections>
+                            <backend_model>adminhtml/system_config_backend_encrypted
+                            </backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[If you want to use the new OAuth AIP, fill this field. You won't need to fille the apiKey below.]]></comment>
+                        </password>
+                        <domain>
+                            <label>Domain</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>socialcommerce/system_config_source_bitly_domain</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[If you want to use the legacy API fill this field. You won't need the password above.]]></comment>
+                        </domain>
+                    </fields>
+                </urlshortenerservice_bitly>
+                <twitter translate="label">
+                    <label>Twitter Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[Provide here the API information provided by Twitter. Check the <a href="https://dev.twitter.com">API documentation</a>]]></comment>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <consumer_key translate="label">
+                            <label>Consumer Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </consumer_key>
+                        <consumer_secret translate="label">
+                            <label>Consumer Secret</label>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted
+                            </backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </consumer_secret>
+                        <auth_token translate="label">
+                            <label>Authorization Token</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auth_token>
+                        <token_secret translate="label">
+                            <label>Authorization Token Secret</label>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted
+                            </backend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </token_secret>
+                    </fields>
+                </twitter>
+                <facebook translate="label">
+                    <label>Facebook Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <comment><![CDATA[Provide here the API information provided by Facebook. Check the <a href="http://developers.facebook.com/">API documentation</a>]]></comment>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <user_id translate="label">
+                            <label>User ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </user_id>
+                        <secret translate="label">
+                            <label>Consumer Secret</label>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted
+                            </backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </secret>
+                        <app_id translate="label">
+                            <label>App ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </app_id>
+                    </fields>
+                </facebook>
+                <delicious translate="label">
+                    <label>Delicious Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <comment><![CDATA[Provide here the API information provided by Facebook. Check the <a href="http://devdelicious.com//">API documentation</a>]]></comment>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <username translate="label">
+                            <label>Username</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </username>
+                        <password translate="label">
+                            <label>Consumer Secret</label>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted
+                            </backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </password>
+                    </fields>
+                </delicious>
+            </groups>
+        </socialcommerce>
+    </sections>
 </config>
