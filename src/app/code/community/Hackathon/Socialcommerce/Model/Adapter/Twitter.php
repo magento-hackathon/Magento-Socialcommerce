@@ -19,13 +19,18 @@ class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcom
      */
     public function sendSinglePost ( Hackathon_Socialcommerce_Model_Messagetype_Singlepost $post )
     {
-        if (!$this->_getConfig()->isTwitterEnabled() )
+        if ( $this->_getConfig()->isTwitterEnabled() )
         {
-            return false;    
+            try
+            {
+                $this->_getClient()->statusUpdate($post->getText());
+            }
+            catch ( Zend_Service_Twitter_Exception $e )
+            {
+                Hackathon_Socialcommerce_Log::log("Could not send to Twitter: "  . $e->getMessage());
+            }
         }
-        
-        $this->_getClient()->statusUpdate($post->getText());
-        
+
         return $this;
     }
 
