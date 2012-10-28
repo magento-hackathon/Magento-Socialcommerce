@@ -25,7 +25,7 @@
                     <show_in_store>1</show_in_store>
                     <comment><![CDATA[These messages will be send to your social networks by default.]]></comment>
                     <fields>
-                        <new_product translate="label ">
+                        <new_product translate="label">
                             <label>New product</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>10</sort_order>
@@ -34,6 +34,14 @@
                             <show_in_store>1</show_in_store>
                             <comment><![CDATA[You can use some template variable: ':name' for the product name, ':link' for the product url.]]></comment>
                         </new_product>
+                        <new_order translate="label">
+                            <label>New order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </new_order>
                     </fields>
                 </messages>
                 <urlshortener translate="label" module="socialcommerce">
