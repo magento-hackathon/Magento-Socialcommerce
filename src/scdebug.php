@@ -70,11 +70,9 @@ require_once $mageFilename;
 
 #Varien_Profiler::enable();
 
-if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
-    Mage::setIsDeveloperMode(true);
-}
+Mage::setIsDeveloperMode(true);
 
-#ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 
 umask(0);
 
@@ -88,7 +86,7 @@ Mage::app($mageRunCode, $mageRunType);
 
 /** @var $post Hackathon_Socialcommerce_Model_Messagetype_Singlepost */
 $post = Mage::getModel('socialcommerce/messagetype_singlepost');
-$post->setText($this->_getConfig()->getMessageNewProduct());
+$post->setText('hello world');
 
 /** @var $twitter Hackathon_Socialcommerce_Model_Adapter_Twitter */
 $twitter = Mage::getModel('socialcommerce/adapter_twitter');
