@@ -70,17 +70,6 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfig('socialcommerce/facebook/user_id');
     }
 
-    public function getBitlyUsername ()
-    {
-        return Mage::getStoreConfig('socialcommerce/bitly/username');
-    }
-
-    public function getBitlyPassword ()
-    {
-        return Mage::helper('core')->decrypt(
-                Mage::getStoreConfig('socialcommerce/bitly/password'));
-    }
-
     public function getMessageNewProduct() {
         return Mage::getStoreConfig('socialcommerce/messages/new_product');
     }
@@ -109,34 +98,64 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function shorten ($longUrl)
     {
+        /* @var $shortUrlModel Hackathon_Socialcommerce_Model_Shorturl */
         $shortUrlModel = Mage::getModel('socialcommerce/shorturl');
         $shortUrlModel->loadByLongUrl($longUrl);
         if (! $shortUrlModel->getId()) {
 
             $service = $this->getShorturlService();
             try {
-                $shortUrl = $service->shorten($longUrl);
-                $shortUrlModel->setShorturl($shortUrl)
-                    ->setLongurl($longUrl)
+                $shortUrlModel->setShortUrl($service->shorten($longUrl))
+                    ->setLongUrl($longUrl)
                     ->setService($service->getName())
-                    ->setCreateTime(
-                        $shortUrlModel->getResource()
-                            ->formatDate(time()))
                     ->save();
             } catch (Exception $e) {
                 Mage::logException($e);
                 $shortUrlModel->setShortUrl($longUrl);
             }
         }
-        return $shortUrlModel->getShorturl();
+        return $shortUrlModel->getShortUrl();
     }
 
     /**
+     * Get a short url string from a long one thanks to external service
      *
-     * @return Hackathon_Socialcommerce_Model_Shorturl_Abstract
+     * @param $longUrl string
+     * @return mixed
      */
-    public function getShorturlService ($service = null, $configuration = null)
+    public function expand ($shortUrl)
     {
-        return Mage::getModel('socialcommerce/shorturl_service_factory')->create($service, $configuration);
+        /* @var $shortUrlModel Hackathon_Socialcommerce_Model_Shorturl */
+        $shortUrlModel = Mage::getModel('socialcommerce/shorturl');
+        $shortUrlModel->loadByShortUrl($shortUrl);
+        if (! $shortUrlModel->getId()) {
+
+            $service = $this->getShorturlService();
+            try {
+                $shortUrlModel->setLongUrl($service->expand($shortUrl))
+                    ->setShortUrl($shortUrl)
+                    ->setService($service->getName())
+                    ->save();
+            } catch (Exception $e) {
+                Mage::logException($e);
+                $shortUrlModel->setLongUrl($shortUrl);
+            }
+        }
+        return $shortUrlModel->getLongUrl();
+    }
+
+
+
+    /**
+     * Parameter $service is tring of the service name. e.g. 'bitly'
+     * Parameter $configuration is an array of configuration available for the HttpClient Class and for the service
+     *
+     * @param $service string
+     * @param $configuration array
+     * @return Hackathon_Socialcommerce_Model_Shorturl_Service_Abstract
+     */
+    public function getShorturlService ($service = null, $configuration = array())
+    {
+        return Mage::getModel('socialcommerce/shorturl_factory')->create($service, $configuration);
     }
 }

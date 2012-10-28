@@ -32,24 +32,26 @@
  * @package Hackathon_Socialcommerce
  * @author Sylvain Rayé <sylvain.raye@gmail.com>
  */
-class Hackathon_Socialcommerce_Model_System_Config_Source_Service
+class Hackathon_Socialcommerce_Model_System_Config_Source_Bitly_Domain
 {
+
     protected $_options;
 
     public function toOptionArray ()
     {
         if (! $this->_options) {
-            $this->_options = array();
-            $keyMarker = 'urlshortenerservice_';
-            foreach (Mage::getStoreConfig('socialcommerce') as $key => $config) {
-                if (strpos($key, $keyMarker) === 0) {
-                    $service = substr($key, strlen($keyMarker));
-                    $this->_options[] = array(
-                            'label' => $service,
-                            'value' => $service
-                    );
-                }
-            }
+            $this->_options[] = array(
+                    'label' => 'bit.ly',
+                    'value' => 'bit.ly'
+            );
+            $this->_options[] = array(
+                    'label' => 'j.mp',
+                    'value' => 'j.mp'
+            );
+            $this->_options[] = array(
+                    'label' => 'bit.com',
+                    'value' => 'bit.com'
+            );
         }
         return $this->_options;
     }

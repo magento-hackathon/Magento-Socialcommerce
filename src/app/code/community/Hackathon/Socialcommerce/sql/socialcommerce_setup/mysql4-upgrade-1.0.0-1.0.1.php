@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Hackathon
  *
@@ -25,32 +24,17 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-/**
- * Source file for services
- *
- * @category Hackathon
- * @package Hackathon_Socialcommerce
- * @author Sylvain Ray <sylvain.raye@gmail.com>
- */
-class Hackathon_Socialcommerce_Model_System_Config_Source_Service
-{
-    protected $_options;
+$installer = $this;
 
-    public function toOptionArray ()
-    {
-        if (! $this->_options) {
-            $this->_options = array();
-            $keyMarker = 'urlshortenerservice_';
-            foreach (Mage::getStoreConfig('socialcommerce') as $key => $config) {
-                if (strpos($key, $keyMarker) === 0) {
-                    $service = substr($key, strlen($keyMarker));
-                    $this->_options[] = array(
-                            'label' => $service,
-                            'value' => $service
-                    );
-                }
-            }
-        }
-        return $this->_options;
-    }
-}
+/* @var $installer Mage_Core_Model_Resource_Setup */
+$installer->startSetup();
+
+$installer->run("
+ALTER TABLE `{$installer->getTable('socialcommerce/shorturl')}`
+CHANGE `shorturl` `short_url` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+CHANGE `longurl` `long_url` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+CHANGE `create_time` `created_at` DATETIME NULL DEFAULT NULL;
+");
+
+$installer->endSetup();
+

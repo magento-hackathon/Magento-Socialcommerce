@@ -26,31 +26,33 @@
  */
 
 /**
- * Source file for services
+ * Social Commerce Data Helper
  *
  * @category Hackathon
  * @package Hackathon_Socialcommerce
  * @author Sylvain Rayé <sylvain.raye@gmail.com>
  */
-class Hackathon_Socialcommerce_Model_System_Config_Source_Service
+class Hackathon_Socialcommerce_Model_Shorturl_Factory
 {
-    protected $_options;
-
-    public function toOptionArray ()
+    /**
+     *
+     * @param string|null $service
+     * @param array  $configuration
+     *
+     * @return Hackathon_Socialcommerce_Model_Shorturl_Service
+     */
+    public function create($service = null, $configuration = array())
     {
-        if (! $this->_options) {
-            $this->_options = array();
-            $keyMarker = 'urlshortenerservice_';
-            foreach (Mage::getStoreConfig('socialcommerce') as $key => $config) {
-                if (strpos($key, $keyMarker) === 0) {
-                    $service = substr($key, strlen($keyMarker));
-                    $this->_options[] = array(
-                            'label' => $service,
-                            'value' => $service
-                    );
-                }
-            }
+        if (is_null($service)) {
+            $service = Mage::getStoreConfig('socialcommerce/urlshortener/service');
         }
-        return $this->_options;
+
+        $configuration = array_merge($configuration, Mage::getStoreConfig('socialcommerce/urlshortenerservice_' . $service));
+
+        $shortUrlService = Mage::getModel('socialcommerce/shorturl_service_' . $service);
+        if ($shortUrlService) {
+            $shortUrlService->setConfiguration($configuration);
+        }
+        return $shortUrlService;
     }
 }

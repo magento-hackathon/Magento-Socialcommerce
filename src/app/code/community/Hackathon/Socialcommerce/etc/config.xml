@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Hackathon_Socialcommerce>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</Hackathon_Socialcommerce>
 	</modules>
 
@@ -12,10 +12,10 @@
 				<service>bitly</service>
 			</urlshortener>
 			<urlshortenerservice_bitly>
-                <login>hackathon</login>
-                <apiKey></apiKey>
-                <version>2.0.1</version>
-            </urlshortenerservice_bitly>
+				<login>hackathon</login>
+				<apiKey></apiKey>
+				<version>2.0.1</version>
+			</urlshortenerservice_bitly>
 		</socialcommerce>
 	</default>
 
@@ -32,14 +32,14 @@
 				<resourceModel>socialcommerce_resource</resourceModel>
 			</socialcommerce>
 
-            <socialcommerce_resource>
-                <class>Hackathon_Socialcommerce_Model_Resource</class>
-                <entities>
-                    <shorturl>
-                        <table>socialcommerce_shorturl</table>
-                    </shorturl>
-                </entities>
-            </socialcommerce_resource>
+			<socialcommerce_resource>
+				<class>Hackathon_Socialcommerce_Model_Resource</class>
+				<entities>
+					<shorturl>
+						<table>socialcommerce_shorturl</table>
+					</shorturl>
+				</entities>
+			</socialcommerce_resource>
 		</models>
 
 		<helpers>
@@ -54,35 +54,35 @@
 					<module>Hackathon_Socialcommerce</module>
 				</setup>
 				<connection>
-                    <use>core_setup</use>
-                </connection>
+					<use>core_setup</use>
+				</connection>
 			</socialcommerce_setup>
 
-            <socialcommerce_write>
-                <connection>
-                    <use>core_write</use>
-                </connection>
-            </socialcommerce_write>
+			<socialcommerce_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</socialcommerce_write>
 
-            <socialcommerce_read>
-                <connection>
-                    <use>core_read</use>
-                </connection>
-            </socialcommerce_read>
+			<socialcommerce_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</socialcommerce_read>
 		</resources>
 	</global>
 
-    <adminhtml>
-        <events>
-            <catalog_product_save_before>
-                <observers>
-                    <socialcommerce_catalog_product_save_before>
-                        <type>singleton</type>
-                        <class>socialcommerce/observer</class>
-                        <method>onCatalogProductSaveBefore</method>
-                    </socialcommerce_catalog_product_save_before>
-                </observers>
-            </catalog_product_save_before>
-        </events>
-    </adminhtml>
+	<adminhtml>
+		<events>
+			<catalog_product_save_before>
+				<observers>
+					<socialcommerce_catalog_product_save_before>
+						<type>singleton</type>
+						<class>socialcommerce/observer</class>
+						<method>onCatalogProductSaveBefore</method>
+					</socialcommerce_catalog_product_save_before>
+				</observers>
+			</catalog_product_save_before>
+		</events>
+	</adminhtml>
 </config>

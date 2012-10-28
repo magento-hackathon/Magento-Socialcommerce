@@ -26,53 +26,58 @@
  */
 
 /**
- * Bitly Helper to shorten urls
+ * Abstract Class for Shorturl services
  *
  * @category Hackathon
  * @package Hackathon_Socialcommerce
  * @author Sylvain Rayé <sylvain.raye@gmail.com>
  */
-class Hackathon_Socialcommerce_Model_Adapter_Bitly extends Mage_Core_Helper_Abstract
+abstract class Hackathon_Socialcommerce_Model_Shorturl_Service_Abstract extends Varien_Object
 {
-	const ENDPOINT_URL = 'https://api-ssl.bitly.com';
 
-	private $_token;
+    protected $_name;
 
-	public function __construct ()
-	{
-		$this->init();
-		return $this;
-	}
-
-	public function init ()
-	{
-		$helper = Mage::helper('socialcommerce');
-
-		$username = $helper->getBitlyUsername();
-		$password = $helper->getBitlyPassword();
-
-		$tokenUrl = self::ENDPOINT_URL . '/oauth/access_token';
-
-		$config = array(
-				'adapter' => 'Zend_Http_Client_Adapter_Curl',
-				'curl_options' => array (
-						'CURLOPT_URL' => $tokenUrl,
-						'CURLOPT_SSL_VERIFYPEER' => true,
-						'CURLOPT_SSL_VERIFYHOST' => 2,
-						'CURLOPT_FAILONERROR' => true,
-						'CURLOPT_RETURNTRANSFER' => true
-				)
-		);
-
-		$client = new Zend_Http_Client($tokenUrl, $config);
-		$client->setAuth($username, $password);
-		$this->_token = $client->request('POST')->getBody();
-
-		return $this;
-	}
-
-    public function getToken ()
+    /**
+     * Get current service name
+     *
+     * @return string
+     */
+    public function getName ()
     {
-    	return $this->_token;
+        return $this->_name;
     }
+
+    /**
+     *
+     * @param $configuration array
+     * @return Zend_Http_Client
+     */
+    public function getHttpClient ($configuration = array())
+    {
+        if (! isset($this->_data['http_client'])) {
+            $this->_data['http_client'] = new Zend_Http_Client(null,
+                    array_merge($configuration,
+                            array(
+                                    'timeout' => 10
+                            )));
+        }
+        return $this->_data['http_client'];
+    }
+
+    /**
+     *
+     * @param string $longurl
+     *
+     * @return Varien_Object
+     */
+    abstract public function shorten ($longurl);
+
+    /**
+     *
+     * @param string $shorturl
+     *
+     * @return Varien_Object
+     */
+    abstract public function expand ($shorturl);
 }
+

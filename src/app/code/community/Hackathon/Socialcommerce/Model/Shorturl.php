@@ -45,6 +45,19 @@ class Hackathon_Socialcommerce_Model_Shorturl extends Mage_Core_Model_Abstract
         return $this;
     }
 
+    protected function _beforeSave()
+    {
+        if (!$this->getId()) {
+            $this->setCreatedAt(now());
+        }
+
+        if ($this->getShortUrl() == $this->getLongUrl()) {
+            $this->_dataSaveAllowed = false;
+            $this->setDataChanges(false);
+        }
+        return parent::_beforeSave();
+    }
+
     /**
      * Get ShortUrl Object from LongUrl
      *
@@ -54,7 +67,20 @@ class Hackathon_Socialcommerce_Model_Shorturl extends Mage_Core_Model_Abstract
      */
     public function loadByLongUrl ($longUrl)
     {
-        $this->load($longUrl, 'longurl');
+        $this->load($longUrl, 'long_url');
+        return $this;
+    }
+
+    /**
+     * Get LongUrl Object from ShortUrl
+     *
+     * @param string $shortUrl
+     *
+     * @return Hackathon_Socialcommerce_Model_Shorturl
+     */
+    public function loadByShortUrl ($shortUrl)
+    {
+        $this->load($shortUrl, 'short_url');
         return $this;
     }
 }

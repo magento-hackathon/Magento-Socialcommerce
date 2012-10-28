@@ -55,7 +55,7 @@
 					</fields>
 				</urlshortener>
 				<urlshortenerservice_bitly translate="label" module="socialcommerce">
-					<label>Bitly Configuration</label>
+					<label>Bitly Configuration (URL Shortener)</label>
 					<sort_order>17</sort_order>
 					<show_in_default>1</show_in_default>
 					<show_in_website>1</show_in_website>
@@ -70,8 +70,8 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</login>
-						<apiKey translate="label" module="socialcommerce">
-							<label>apiKey</label>
+						<password>
+							<label>Password</label>
 							<frontend_type>obscure</frontend_type>
 							<backend_model>adminhtml/system_config_backend_encrypted
 							</backend_model>
@@ -79,7 +79,18 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-						</apiKey>
+							<comment><![CDATA[If you want to use the new OAuth AIP, fill this field. You won't need to fille the apiKey below.]]></comment>
+						</password>
+						<domain>
+							<label>Domain</label>
+							<frontend_type>select</frontend_type>
+							<source_model>socialcommerce/system_config_source_bitly_domain</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment><![CDATA[If you want to use the legacy API fill this field. You won't need the password above.]]></comment>
+						</domain>
 					</fields>
 				</urlshortenerservice_bitly>
 				<twitter translate="label">
@@ -100,14 +111,6 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</active>
-						<consumer_key translate="label">
-							<label>Consumer Key</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</consumer_key>
 						<consumer_key translate="label">
 							<label>Consumer Key</label>
 							<frontend_type>text</frontend_type>
