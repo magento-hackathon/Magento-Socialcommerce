@@ -19,12 +19,14 @@ class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcom
      */
     public function sendSinglePost ( Hackathon_Socialcommerce_Model_Messagetype_Singlepost $post )
     {
-        if ( $this->_getConfig()->isTwitterEnabled() )
+        if (!$this->_getConfig()->isTwitterEnabled() )
         {
-            $this->_getClient()->statusUpdate($post->getText());
-            // @todo picture
-            // @todo shorten url
+            return false;    
         }
+        
+        $this->_getClient()->statusUpdate($post->getText());
+        
+        return $this;
     }
 
     /**
