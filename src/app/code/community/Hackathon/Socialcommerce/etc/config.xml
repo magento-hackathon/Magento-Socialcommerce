@@ -8,6 +8,9 @@
 
 	<default>
 		<socialcommerce>
+			<messages>
+				<new_product>Check our new product :name :link</new_product>
+			</messages>
 			<urlshortener>
 				<service>bitly</service>
 			</urlshortener>
@@ -15,6 +18,7 @@
 				<login>hackathon</login>
 				<apiKey></apiKey>
 				<version>2.0.1</version>
+				<domain>bit.ly</domain>
 			</urlshortenerservice_bitly>
 		</socialcommerce>
 	</default>
