@@ -26,53 +26,33 @@
  */
 
 /**
- * Bitly Helper to shorten urls
+ * Social Commerce Data Helper
  *
  * @category Hackathon
  * @package Hackathon_Socialcommerce
  * @author Sylvain Rayé <sylvain.raye@gmail.com>
  */
-class Hackathon_Socialcommerce_Model_Adapter_Bitly extends Mage_Core_Helper_Abstract
+class Hackathon_Socialcommerce_Model_Shorturl_Factory
 {
-	const ENDPOINT_URL = 'https://api-ssl.bitly.com';
-
-	private $_token;
-
-	public function __construct ()
-	{
-		$this->init();
-		return $this;
-	}
-
-	public function init ()
-	{
-		$helper = Mage::helper('socialcommerce');
-
-		$username = $helper->getBitlyUsername();
-		$password = $helper->getBitlyPassword();
-
-		$tokenUrl = self::ENDPOINT_URL . '/oauth/access_token';
-
-		$config = array(
-				'adapter' => 'Zend_Http_Client_Adapter_Curl',
-				'curl_options' => array (
-						'CURLOPT_URL' => $tokenUrl,
-						'CURLOPT_SSL_VERIFYPEER' => true,
-						'CURLOPT_SSL_VERIFYHOST' => 2,
-						'CURLOPT_FAILONERROR' => true,
-						'CURLOPT_RETURNTRANSFER' => true
-				)
-		);
-
-		$client = new Zend_Http_Client($tokenUrl, $config);
-		$client->setAuth($username, $password);
-		$this->_token = $client->request('POST')->getBody();
-
-		return $this;
-	}
-
-    public function getToken ()
+    /**
+     *
+     * @param string|null $service
+     * @param array  $configuration
+     *
+     * @return Hackathon_Socialcommerce_Model_Shorturl_Service
+     */
+    public function create($service = null, $configuration = array())
     {
-    	return $this->_token;
+        if (is_null($service)) {
+            $service = Mage::getStoreConfig('socialcommerce/urlshortener/service');
+        }
+
+        $configuration = array_merge($configuration, Mage::getStoreConfig('socialcommerce/urlshortenerservice_' . $service));
+
+        $shortUrlService = Mage::getModel('socialcommerce/shorturl_service_' . $service);
+        if ($shortUrlService) {
+            $shortUrlService->setConfiguration($configuration);
+        }
+        return $shortUrlService;
     }
 }

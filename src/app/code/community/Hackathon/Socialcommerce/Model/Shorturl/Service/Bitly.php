@@ -32,43 +32,83 @@
  * @package Hackathon_Socialcommerce
  * @author Sylvain Rayé <sylvain.raye@gmail.com>
  */
-class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_Socialcommerce_Model_Shorturl_Abstract
+class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_Socialcommerce_Model_Shorturl_Service_Abstract
 {
+    const ENDPOINT_URL = 'https://api-ssl.bitly.com';
 
     protected $_name = 'bit.ly';
 
+    protected $_token;
+
+    protected $_lastResponse;
+
+    public function init()
+    {
+        $config = $this->getConfiguration();
+        if ($config['password']) {
+            $config['password'] = Mage::helper('core')->decrypt($config['password']);
+        } else {
+            return $this;
+        }
+
+        if (empty($this->_token)) {
+
+            $url = Zend_Uri::factory(self::ENDPOINT_URL . '/oauth/access_token');
+
+            $httpClientConfiguration = array(
+                    'adapter' => 'Zend_Http_Client_Adapter_Curl',
+                    'storeresponse' => true,
+                    'curl_options' => array(
+                            'CURLOPT_URL' => $url->__toString(),
+                            'CURLOPT_SSL_VERIFYPEER' => true,
+                            'CURLOPT_SSL_VERIFYHOST' => 2,
+                            'CURLOPT_FAILONERROR' => true,
+                            'CURLOPT_RETURNTRANSFER' => true
+                    )
+            );
+            $client = $this->getHttpClient($httpClientConfiguration);
+            $client->setUri($url);
+            $client->setAuth($config['login'], $config['password']);
+
+            $response = $client->request('POST');
+
+            if ($response->isError()) {
+                throw new Exception(
+                        'HTTP Error: ' . $response->getStatus() . ' ' .
+                        $response->getMessage());
+            }
+
+            $this->_token = $response->getBody();
+
+            if (empty($this->_token)) {
+                throw new Exception ('Bitly Token empty!');
+            }
+
+        }
+        return $this;
+    }
+
     /**
      * Shorten API for bitly
+     *
      * @todo change the legacy API Key protocol to OAuth2 protocol
      *
      * @param string $longUrl
      * @throws Exception
-     * @return string $shortUrl
+     * @return string
      */
     public function shorten ($longUrl)
     {
-        $url = Zend_Uri::factory('http://api.bit.ly/shorten');
+        $this->init();
 
-        $config = $this->getConfiguration();
+        $url = Zend_Uri::factory(self::ENDPOINT_URL . '/v3/shorten');
 
-        if ($config['apiKey']) {
-            $config['apiKey'] = Mage::helper('core')->decrypt($config['apiKey']);
-        }
-
-        $query = array_merge($config,
-                array(
-                        'format' => 'json',
-                        'longUrl' => $longUrl
-                ));
-
-        Mage::log(Zend_Debug::dump($query, null, false), Zend_Log::DEBUG);
-
-        $url->setQuery($query);
-
-        $httpClient = $this->getHttpClient();
-        $httpClient->setUri($url);
-
-        $response = $httpClient->request();
+        $client = $this->getHttpClient();
+        $response = $client->setUri($url)
+            ->setParameterPost('format', 'json')
+            ->setParameterPost('access_token', $this->getToken())
+            ->setParameterPost('longUrl', $longUrl)
+            ->request('POST');
 
         if ($response->isError()) {
             throw new Exception(
@@ -76,14 +116,16 @@ class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_So
                              $response->getMessage());
         }
 
-        $jsonResponse = Zend_Json::decode($response->getBody());
+        $jsonResponse = new Varien_Object(Zend_Json::decode($response->getBody()));
 
-        if ($jsonResponse['errorCode'] != '0') {
+        if ($jsonResponse->getStatusCode() != '200') {
             throw new Exception(
-                    'Bitly Error: ' . $jsonResponse['errorCode'] . ' ' .
-                             $jsonResponse['errorMessage']);
+                    'Bitly Error: ' . $jsonResponse->getStatusCode() . ' ' .
+                             $jsonResponse->getStatusTxt());
         }
-        return $jsonResponse['results'][$longUrl]['shortUrl'];
+
+        $this->_lastResponse = new Varien_Object($jsonResponse->getData('data')); // attention: Bitly return a key 'data'
+        return $this->_lastResponse->getUrl();
     }
 
     /**
@@ -91,11 +133,49 @@ class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_So
      * @param string $shortUrl
      *
      * @throws Exception
-     * @return string $longUrl
+     * @return string
      */
     public function expand ($shortUrl)
     {
-        throw new Exception('Not implemented');
+        $this->init();
+
+        $url = Zend_Uri::factory(self::ENDPOINT_URL . '/v3/expand');
+
+        $client = $this->getHttpClient();
+        $response = $client->setUri($url)
+            ->setParameterPost('format', 'json')
+            ->setParameterPost('access_token', $this->getToken())
+            ->setParameterPost('shortUrl', $shortUrl)
+            ->request('POST');
+
+        if ($response->isError()) {
+            throw new Exception(
+                    'HTTP Error: ' . $response->getStatus() . ' ' .
+                             $response->getMessage());
+        }
+
+        Mage::log($response->getBody(), Zend_Log::DEBUG);
+
+        $jsonResponse = new Varien_Object(Zend_Json::decode($response->getBody()));
+
+        if ($jsonResponse->getStatusCode() != '200') {
+            throw new Exception(
+                    'Bitly Error: ' . $jsonResponse->getStatusCode() . ' ' .
+                             $jsonResponse->getStatusTxt());
+        }
+
+        $this->_lastResponse = new Varien_Object($jsonResponse->getData('data')); // attention: Bitly return a key 'data'
+        return $this->_lastResponse->getLongUrl();
+    }
+
+    public function getToken ()
+    {
+        return $this->_token;
+    }
+
+    public function getLastResponse ()
+    {
+        return $this->_lastResponse;
     }
 }
 

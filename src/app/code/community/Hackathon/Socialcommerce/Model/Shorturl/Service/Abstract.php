@@ -32,7 +32,7 @@
  * @package Hackathon_Socialcommerce
  * @author Sylvain Rayé <sylvain.raye@gmail.com>
  */
-abstract class Hackathon_Socialcommerce_Model_Shorturl_Abstract extends Varien_Object
+abstract class Hackathon_Socialcommerce_Model_Shorturl_Service_Abstract extends Varien_Object
 {
 
     protected $_name;
@@ -49,15 +49,17 @@ abstract class Hackathon_Socialcommerce_Model_Shorturl_Abstract extends Varien_O
 
     /**
      *
+     * @param $configuration array
      * @return Zend_Http_Client
      */
-    public function getHttpClient ()
+    public function getHttpClient ($configuration = array())
     {
         if (! isset($this->_data['http_client'])) {
             $this->_data['http_client'] = new Zend_Http_Client(null,
-                    array(
-                            'timeout' => 10
-                    ));
+                    array_merge($configuration,
+                            array(
+                                    'timeout' => 10
+                            )));
         }
         return $this->_data['http_client'];
     }
@@ -66,7 +68,7 @@ abstract class Hackathon_Socialcommerce_Model_Shorturl_Abstract extends Varien_O
      *
      * @param string $longurl
      *
-     * @return string $shorturl
+     * @return Varien_Object
      */
     abstract public function shorten ($longurl);
 
@@ -74,7 +76,7 @@ abstract class Hackathon_Socialcommerce_Model_Shorturl_Abstract extends Varien_O
      *
      * @param string $shorturl
      *
-     * @return string $longurl
+     * @return Varien_Object
      */
     abstract public function expand ($shorturl);
 }
