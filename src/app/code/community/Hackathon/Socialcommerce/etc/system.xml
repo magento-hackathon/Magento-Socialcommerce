@@ -42,6 +42,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </new_order>
+                        <new_category translate="label">
+                            <label>New category</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[You can use some template variable: ':name' for the category name, ':link' for the category url.]]></comment>
+                        </new_category>
                     </fields>
                 </messages>
                 <urlshortener translate="label" module="socialcommerce">

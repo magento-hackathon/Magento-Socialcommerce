@@ -74,6 +74,10 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfig('socialcommerce/messages/new_order');
     }
 
+    public function getMessageNewCategory() {
+        return Mage::getStoreConfig('socialcommerce/messages/new_category');
+    }
+
     public function getMessageNewProduct() {
         return Mage::getStoreConfig('socialcommerce/messages/new_product');
     }

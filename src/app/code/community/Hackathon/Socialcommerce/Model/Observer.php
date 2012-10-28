@@ -40,4 +40,27 @@ class Hackathon_Socialcommerce_Model_Observer extends Hackathon_Socialcommerce_M
         $twitter = Mage::getModel('socialcommerce/adapter_twitter');
         $twitter->sendSinglePost($post);
     }
+
+    /**
+     * catalog_category_save_after
+     */
+    public function onCatalogCategorySaveAfter(Varien_Event_Observer $observer) {
+        /** @var $category Mage_Catalog_Model_Category */
+        $category = $observer->getCategory();
+
+        if (null != $category->getId()) {
+            return false;
+        }
+
+        /** @var $post Hackathon_Socialcommerce_Model_Messagetype_Singlepost */
+        $post = Mage::getModel('socialcommerce/messagetype_singlepost');
+
+        $post->setText($this->_getConfig()->getMessageNewOrder());
+        $post->setLink($category->getCategoryIdUrl());
+        $post->setPicture($category->getImageUrl());
+
+        /** @var $twitter Hackathon_Socialcommerce_Model_Adapter_Twitter */
+        $twitter = Mage::getModel('socialcommerce/adapter_twitter');
+        $twitter->sendSinglePost($post);
+    }
 }
