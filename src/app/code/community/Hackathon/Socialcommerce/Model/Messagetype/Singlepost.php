@@ -99,6 +99,7 @@ class Hackathon_Socialcommerce_Model_Messagetype_Singlepost extends Hackathon_So
     public function importProduct ( Mage_Catalog_Model_Product $product )
     {
         $name = $product->getName();
+
         $link =  $this->_getConfig()->shorten($product->getProductUrl());
 
         $map = array(

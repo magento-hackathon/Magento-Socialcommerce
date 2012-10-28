@@ -78,15 +78,15 @@
 
 	<adminhtml>
 		<events>
-			<catalog_product_save_before>
+			<catalog_product_save_after>
 				<observers>
-					<socialcommerce_catalog_product_save_before>
+					<socialcommerce_catalog_product_save_after>
 						<type>singleton</type>
 						<class>socialcommerce/observer</class>
-						<method>onCatalogProductSaveBefore</method>
-					</socialcommerce_catalog_product_save_before>
+						<method>onCatalogProductSaveAfter</method>
+					</socialcommerce_catalog_product_save_after>
 				</observers>
-			</catalog_product_save_before>
+			</catalog_product_save_after>
 		</events>
 	</adminhtml>
 </config>
