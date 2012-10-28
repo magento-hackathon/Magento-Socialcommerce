@@ -6,7 +6,6 @@
 class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcommerce_Model_Abstract
     implements Hackathon_Socialcommerce_Model_Adapter_Interface
 {
-
     /**
      * @var Zend_Service_Twitter
      */
@@ -23,6 +22,10 @@ class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcom
         {
             try
             {
+                if (strlen($post->getText()) > Zend_Service_Twitter::STATUS_MAX_CHARACTERS) {
+                    Hackathon_Socialcommerce_Log::log("Message is to long for twitter");
+                }
+
                 $this->_getClient()->statusUpdate($post->getText());
             }
             catch ( Zend_Service_Twitter_Exception $e )
