@@ -36,6 +36,8 @@ class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_So
 {
     const ENDPOINT_URL = 'https://api-ssl.bitly.com';
 
+    const CONFIG_PATH_DOMAIN = 'socialcommerce/urlshortenerservice_bitly/domain';
+
     protected $_name = 'bit.ly';
 
     protected $_token;
@@ -108,6 +110,7 @@ class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_So
             ->setParameterPost('format', 'json')
             ->setParameterPost('access_token', $this->getToken())
             ->setParameterPost('longUrl', $longUrl)
+            ->setParameterPost('domain', Mage::getStoreConfig(self::CONFIG_PATH_DOMAIN))
             ->request('POST');
 
         if ($response->isError()) {
