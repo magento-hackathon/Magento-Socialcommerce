@@ -70,9 +70,7 @@ require_once $mageFilename;
 
 #Varien_Profiler::enable();
 
-
-    Mage::setIsDeveloperMode(true);
-
+Mage::setIsDeveloperMode(true);
 
 ini_set('display_errors', 1);
 
@@ -86,10 +84,16 @@ $mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 's
 
 Mage::app($mageRunCode, $mageRunType);
 
+Zend_Debug::dump('debug twitter');
+
 /** @var $post Hackathon_Socialcommerce_Model_Messagetype_Singlepost */
 $post = Mage::getModel('socialcommerce/messagetype_singlepost');
-$post->setText($this->_getConfig()->getMessageNewProduct());
+$post->setText('vagrant loves twitter');
+
+Zend_Debug::dump($post);
 
 /** @var $twitter Hackathon_Socialcommerce_Model_Adapter_Twitter */
 $twitter = Mage::getModel('socialcommerce/adapter_twitter');
-$twitter->sendSinglePost($post);
+$post = $twitter->sendSinglePost($post);
+
+Zend_Debug::dump($post);
