@@ -10,6 +10,8 @@
 		<socialcommerce>
 			<messages>
 				<new_product>Check our new product :name :link</new_product>
+                <new_category>Check our new category</new_category>
+                <new_order>Another satisfied customer</new_order>
 			</messages>
 			<urlshortener>
 				<service>bitly</service>
