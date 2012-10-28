@@ -87,6 +87,17 @@
 					</socialcommerce_catalog_product_save_after>
 				</observers>
 			</catalog_product_save_after>
+			
+			<sales_convert_quote_to_order>
+                <observers>
+                    <socialcommerce_sales_convert_quote_to_order>
+                        <type>singleton</type>
+                        <class>socialcommerce/observer</class>
+                        <method>onSalesConvertQuoteToOrder</method>
+                    </socialcommerce_sales_convert_quote_to_order>
+                </observers>
+            </sales_convert_quote_to_order>
+
 		</events>
 	</adminhtml>
 </config>
