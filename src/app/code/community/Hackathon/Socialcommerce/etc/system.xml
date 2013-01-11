@@ -168,7 +168,7 @@
                     </fields>
                 </twitter>
                 <facebook translate="label">
-                    <label>Facebook Configuration</label>
+                    <label>Facebook Configuration (beta - work in progress)</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>30</sort_order>
                     <show_in_default>1</show_in_default>
@@ -214,7 +214,7 @@
                     </fields>
                 </facebook>
                 <delicious translate="label">
-                    <label>Delicious Configuration</label>
+                    <label>Delicious Configuration (beta - work in progress)</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>40</sort_order>
                     <show_in_default>1</show_in_default>
