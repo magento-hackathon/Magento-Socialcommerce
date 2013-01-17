@@ -4,11 +4,13 @@ Magento module which allows to publish to social media network some information 
 ## Features
 
 - Twitter and Bitly Support (Shortened Urls)
-- New products will be published to Twitter with a customized text, title and shortened link of the product when the product is saved and enabled from the backend.
+- New products will be posted to Twitter with a customized text, title and shortened link of the product when the product is saved and enabled from the backend.
 
-## Comnig soon
+## Features Comnig soon
 - Facebook support
 - Delicious support
+- Add picture when post a product
+- Post to the difference services when new categories are created, or new order
 
 ## Configuration 
 

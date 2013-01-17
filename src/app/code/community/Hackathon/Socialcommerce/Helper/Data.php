@@ -30,7 +30,7 @@
  *
  * @category Hackathon
  * @package Hackathon_Socialcommerce
- * @author Sylvain Ray� <sylvain.raye@gmail.com>
+ * @author Sylvain Rayé <sylvain.raye@gmail.com>
  */
 class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
 {

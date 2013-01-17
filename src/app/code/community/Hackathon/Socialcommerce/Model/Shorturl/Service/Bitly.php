@@ -30,7 +30,7 @@
  *
  * @category Hackathon
  * @package Hackathon_Socialcommerce
- * @author Sylvain Rayé <sylvain.raye@gmail.com>
+ * @author Sylvain Ray√© <sylvain.raye@gmail.com>
  */
 class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_Socialcommerce_Model_Shorturl_Service_Abstract
 {
