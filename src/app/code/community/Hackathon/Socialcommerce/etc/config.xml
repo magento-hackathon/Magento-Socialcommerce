@@ -17,7 +17,7 @@
 				<service>bitly</service>
 			</urlshortener>
 			<urlshortenerservice_bitly>
-				<login>hackathon</login>
+				<login></login>
 				<apiKey></apiKey>
 				<version>2.0.1</version>
 				<domain>bit.ly</domain>
