@@ -30,9 +30,9 @@
  *
  * @category Hackathon
  * @package Hackathon_Socialcommerce
- * @author Sylvain Rayé <sylvain.raye@gmail.com>
+ * @author Sylvain Ray√© <sylvain.raye@gmail.com>
  */
-class Hackathon_Socialcommerce_Model_Resource_Shorturl extends Mage_Core_Model_Resource_Db_Abstract
+class Hackathon_Socialcommerce_Model_Resource_Shorturl extends Mage_Core_Model_Mysql4_Abstract
 {
 
     public function _construct ()

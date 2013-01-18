@@ -30,7 +30,7 @@
  *
  * @category Hackathon
  * @package Hackathon_Socialcommerce
- * @author Sylvain Ray� <sylvain.raye@gmail.com>
+ * @author Sylvain Rayé <sylvain.raye@gmail.com>
  */
 class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
 {
@@ -83,7 +83,7 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     public function isTwitterEnabled() {
-        return (1 == Mage::getStoreConfig('socialcommerce/twitter/active'));
+        return Mage::getStoreConfigFlag('socialcommerce/twitter/active');
     }
 
     public function getDeliciousUsername() {
@@ -95,7 +95,7 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     public function isDeliciousEnabled() {
-        return (1 == Mage::getStoreConfig('socialcommerce/delicious/active'));
+        return Mage::getStoreConfigFlag('socialcommerce/delicious/active');
     }
 
     /**
@@ -118,6 +118,7 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
                     ->setService($service->getName())
                     ->save();
             } catch (Exception $e) {
+                Mage::getSingleton('core/session')->addNotice($this->__('An error occur while trying to shorten the url. Please contact the administrator.'));
                 Mage::logException($e);
                 $shortUrlModel->setShortUrl($longUrl);
             }

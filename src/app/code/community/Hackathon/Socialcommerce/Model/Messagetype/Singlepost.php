@@ -100,8 +100,11 @@ class Hackathon_Socialcommerce_Model_Messagetype_Singlepost extends Hackathon_So
     {
         $name = $product->getName();
 
-        $link =  $this->_getConfig()->shorten($product->getProductUrl());
-
+        $link =  $this->_getConfig()->shorten(
+             // force to get url from default store otherwise backend url is provided
+            $product->getUrlInStore(array('_store' => Mage::app()->getDefaultStoreView()->getCode()))
+        );
+        
         $map = array(
             ":name" => $name,
             ":link" => $link,

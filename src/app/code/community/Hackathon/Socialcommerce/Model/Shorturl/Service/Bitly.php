@@ -30,7 +30,7 @@
  *
  * @category Hackathon
  * @package Hackathon_Socialcommerce
- * @author Sylvain Rayé <sylvain.raye@gmail.com>
+ * @author Sylvain Ray√© <sylvain.raye@gmail.com>
  */
 class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_Socialcommerce_Model_Shorturl_Service_Abstract
 {
@@ -49,6 +49,9 @@ class Hackathon_Socialcommerce_Model_Shorturl_Service_Bitly extends Hackathon_So
         $config = $this->getConfiguration();
         if ($config['password']) {
             $config['password'] = Mage::helper('core')->decrypt($config['password']);
+        } else if ($config['access_token']) {
+            $this->_token = $config['access_token'];
+            return $this;
         } else {
             return $this;
         }

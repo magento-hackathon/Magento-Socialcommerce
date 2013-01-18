@@ -17,8 +17,6 @@
 				<service>bitly</service>
 			</urlshortener>
 			<urlshortenerservice_bitly>
-				<login>hackathon</login>
-				<apiKey></apiKey>
 				<version>2.0.1</version>
 				<domain>bit.ly</domain>
 			</urlshortenerservice_bitly>
@@ -89,11 +87,12 @@
 					</socialcommerce_catalog_product_save_after>
 				</observers>
 			</catalog_product_save_after>
-			
-			<sales_convert_quote_to_order>
+		
+            <sales_convert_quote_to_order>
                 <observers>
                     <socialcommerce_sales_convert_quote_to_order>
-                        <type>singleton</type>
+<!--                         <type>singleton</type> -->
+                        <type>disabled</type>
                         <class>socialcommerce/observer</class>
                         <method>onSalesConvertQuoteToOrder</method>
                     </socialcommerce_sales_convert_quote_to_order>
@@ -103,7 +102,8 @@
             <catalog_category_save_after >
                 <observers>
                     <socialcommerce_catalog_category_save_after>
-                        <type>singleton</type>
+<!--                         <type>singleton</type> -->
+                        <type>disabled</type>
                         <class>socialcommerce/observer</class>
                         <method>onCatalogCategorySaveAfter</method>
                     </socialcommerce_catalog_category_save_after>
