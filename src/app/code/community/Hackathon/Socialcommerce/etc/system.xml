@@ -59,6 +59,7 @@
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
+                    <comment><![CDATA[Select a servic which will shorten urls like Product Url when a post to a social media is done.]]></comment>
                     <fields>
                         <service translate="label" module="socialcommerce">
                             <label>Service</label>
