@@ -8,3 +8,5 @@
 .idea
 .project
 .vagrant/files
+
+.DS_Store
