@@ -77,6 +77,15 @@
 	</global>
 
 	<adminhtml>
+
+        <layout>
+            <update<>
+                <socialcommerce>
+                    <file>socialcommerce.xml</file>
+                </socialcommerce>
+            </update<>
+        </layout>
+        
 		<events>
 			<catalog_product_save_after>
 				<observers>
