@@ -79,13 +79,13 @@
 	<adminhtml>
 
         <layout>
-            <update<>
+            <updates>
                 <socialcommerce>
                     <file>socialcommerce.xml</file>
                 </socialcommerce>
-            </update<>
+            </updates>
         </layout>
-        
+
 		<events>
 			<catalog_product_save_after>
 				<observers>
