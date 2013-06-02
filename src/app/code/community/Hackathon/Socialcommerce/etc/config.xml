@@ -83,6 +83,18 @@
 		</resources>
 	</global>
 
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Hackathon_Socialcommerce before="Mage_Adminhtml">Hackathon_Socialcommerce_Adminhtml</Hackathon_Socialcommerce>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
 	<adminhtml>
 
         <layout>

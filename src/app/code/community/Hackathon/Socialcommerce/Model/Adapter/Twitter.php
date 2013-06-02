@@ -114,14 +114,19 @@ class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcom
     public function getUserProfile($id = null)
     {
         $session = Mage::getSingleton('core/session');
-        $helper = Mage::helper('socialcommerce');
+        //$helper = Mage::helper('socialcommerce');
 
-        $client = $this->_getClient();
+        try {
+            $client = $this->_getClient();
 
-        if (empty($id)) {
-            $result = $client->accountVerifyCredentials();
-        } else {
-            $result = $client->userShow($id);
+            if (empty($id)) {
+                $result = $client->accountVerifyCredentials();
+            } else {
+                $result = $client->userShow($id);
+            }
+        } catch (Exception $e) {
+            $session->addError($e->getMessage());
+            return false;
         }
 
         if (!empty($result)) {
@@ -134,8 +139,6 @@ class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcom
                 'profile_image_url' => $result->profile_image_url,
                 'profile_image_url_https' => $result->profile_image_url_https,
             ));
-
-            Mage::log(print_r($result, true));
 
             return $result;
         }

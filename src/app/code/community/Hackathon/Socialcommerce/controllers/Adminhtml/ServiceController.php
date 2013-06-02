@@ -9,7 +9,6 @@ class Hackathon_Socialcommerce_Adminhtml_ServiceController extends Mage_Core_Con
 
         try {
             foreach($availableServices as $service) {
-
                 $post = Mage::getModel('socialcommerce/messagetype_singlepost');
                 $post->setText(Mage::helper('socialcommerce')->getMessageNewOrder());
 

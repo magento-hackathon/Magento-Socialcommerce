@@ -24,7 +24,7 @@ class Hackathon_Socialcommerce_Block_Adminhtml_Button extends Mage_Adminhtml_Blo
 
     protected function _beforeToHtml()
     {
-        $html = $this->getAfterHtml() . $this->getLayout()->createBlock('core/template')
+        $html = $this->getAfterHtml() . $this->getLayout()->createBlock('socialcommerce/adminhtml_button')
                 ->setTemplate ('socialcommerce/buttons.phtml')
                 ->setData(array(
                     'user_profiles' => $this->getServicesUserProfile()
@@ -33,7 +33,11 @@ class Hackathon_Socialcommerce_Block_Adminhtml_Button extends Mage_Adminhtml_Blo
 
         $this->setAfterHtml($html);
 
+    }
 
+    public function getPostServiceUrl ()
+    {
+        return $this->getUrl('socialcommerce/service/post');
     }
 }
 

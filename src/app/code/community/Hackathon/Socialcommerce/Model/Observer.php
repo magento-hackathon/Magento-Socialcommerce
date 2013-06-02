@@ -116,20 +116,22 @@ class Hackathon_Socialcommerce_Model_Observer extends Hackathon_Socialcommerce_M
         /* @var $block Mage_Adminhtml_Block_Catalog_Product_Edit */
         $block = $observer->getEvent()->getBlock();
 
-        if ($block->getId() == 'product_edit' && $block->getChild('save_button')) {
+        if ($block->getId() == 'product_edit' && $block->getChild('save_and_edit_button')) {
 
-            $child = $block->getChild('save_button');
+            $child = $block->getChild('save_and_edit_button');
             $afterHtml = $child->getAfterHtml();
 
             $socialHtml = $child->getLayout()->createBlock('socialcommerce/adminhtml_button', 'post_social')
                 ->setData(array(
                     'label'     => Mage::helper('socialcommerce')->__('Post to Social'),
-                    'onclick'   => '',
-                    'class' => 'save'
+                    //'onclick'   => '',
+                    //'class' => '',
+                    'id' => 'btn_post_social'
                 ))
                 ->toHtml();
 
-            $socialButtonsHtml = '<div id="container-socialbuttons">' . $socialHtml . '</div>';
+            //$socialButtonsHtml = '<div id="container-socialbuttons">' . $socialHtml . '</div>';
+            $socialButtonsHtml  = $socialHtml; // @todo tmp until frontend is finished
 
             $child->setAfterHtml($afterHtml . $socialButtonsHtml);
         }
