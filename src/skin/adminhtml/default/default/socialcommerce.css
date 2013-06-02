@@ -1,0 +1,11 @@
+#socialcommerce li {
+    list-style-type: none;
+    float: left;
+    padding: 2px;
+}
+
+#socialcommerce a.inactive img {
+    filter:alpha(opacity=30);
+    -moz-opacity: 0.3;
+    opacity: 0.3;
+}

@@ -1,2 +1,5 @@
 src/app/code/community/Hackathon/Socialcommerce app/code/community/Hackathon/Socialcommerce
 src/app/etc/modules/Hackathon_Socialcommerce.xml app/etc/modules/Hackathon_Socialcommerce.xml
+src/app/design/adminhtml/default/default/layout/socialcommerce.xml app/design/adminhtml/default/default/layout/socialcommerce.xml
+src/app/design/adminhtml/default/default/template/socialcommerce app/design/adminhtml/default/default/template/socialcommerce
+src/skin/adminhtml/default/default/socialcommerce.css skin/adminhtml/default/default/socialcommerce.css
