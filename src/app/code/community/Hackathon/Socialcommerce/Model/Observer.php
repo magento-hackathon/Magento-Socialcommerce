@@ -123,7 +123,7 @@ class Hackathon_Socialcommerce_Model_Observer extends Hackathon_Socialcommerce_M
 
             $socialHtml = $child->getLayout()->createBlock('socialcommerce/adminhtml_button', 'post_social')
                 ->setData(array(
-                    'label'     => Mage::helper('socialcommerce')->__('Save & Post to Social'),
+                    'label'     => Mage::helper('socialcommerce')->__('Post to Social'),
                     'onclick'   => '',
                     'class' => 'save'
                 ))
