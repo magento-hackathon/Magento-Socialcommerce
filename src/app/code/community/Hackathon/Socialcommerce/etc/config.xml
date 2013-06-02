@@ -24,6 +24,13 @@
 	</default>
 
 	<global>
+        <socialcommerce>
+            <services>
+                <twitter />
+                <!--facebook /-->
+                <!--delicious /-->
+            </services>
+        </socialcommerce>
 		<blocks>
 			<socialcommerce>
 				<class>Hackathon_Socialcommerce_Block</class>
@@ -119,6 +126,14 @@
                 </observers>
             </catalog_category_save_after >
 
+            <core_block_abstract_prepare_layout_after>
+                <observers>
+                        <socialcommerce_buttons_post>
+                            <class>socialcommerce/observer</class>
+                            <method>insertPostSocialButton</method>
+                        </socialcommerce_buttons_post>
+                </observers>
+            </core_block_abstract_prepare_layout_after>
 		</events>
 	</adminhtml>
 </config>

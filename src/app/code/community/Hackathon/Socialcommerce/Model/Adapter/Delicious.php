@@ -78,4 +78,9 @@ class Hackathon_Socialcommerce_Model_Adapter_Delicious extends Hackathon_Socialc
 
         return $this->_client;
     }
+
+    public function getUserProfile($id = null)
+    {
+        // @TODO TO implement
+    }
 }

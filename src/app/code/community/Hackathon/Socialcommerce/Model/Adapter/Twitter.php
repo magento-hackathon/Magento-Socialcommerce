@@ -35,6 +35,9 @@
 class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcommerce_Model_Abstract
     implements Hackathon_Socialcommerce_Model_Adapter_Interface
 {
+
+    protected $_service = 'twitter';
+
     /**
      * @var Zend_Service_Twitter
      */
@@ -47,11 +50,13 @@ class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcom
      */
     public function sendSinglePost ( Hackathon_Socialcommerce_Model_Messagetype_Singlepost $post )
     {
-        $session = Mage::getSingleton('core/session');
-        $helper = Mage::helper('socialcommerce');
+
         
-        if ( $this->_getConfig()->isTwitterEnabled() )
+        if ( $this->_getConfig()->isServiceEnabled($this->_service) )
         {
+            $session = Mage::getSingleton('core/session');
+            $helper = Mage::helper('socialcommerce');
+
             try
             {
                 if (strlen($post->getText()) > Zend_Service_Twitter::STATUS_MAX_CHARACTERS) {
@@ -100,5 +105,40 @@ class Hackathon_Socialcommerce_Model_Adapter_Twitter extends Hackathon_Socialcom
         }
 
         return $this->_client;
+    }
+
+    /**
+     * @param null $id
+     * @return bool|Zend_Rest_Client_Result
+     */
+    public function getUserProfile($id = null)
+    {
+        $session = Mage::getSingleton('core/session');
+        $helper = Mage::helper('socialcommerce');
+
+        $client = $this->_getClient();
+
+        if (empty($id)) {
+            $result = $client->accountVerifyCredentials();
+        } else {
+            $result = $client->userShow($id);
+        }
+
+        if (!empty($result)) {
+
+            $result = new Varien_Object(array(
+                'id' => $result->id,
+                'service' => $this->_service,
+                'name' => $result->name,
+                'screen_name' => $result->screen_name,
+                'profile_image_url' => $result->profile_image_url,
+                'profile_image_url_https' => $result->profile_image_url_https,
+            ));
+
+            Mage::log(print_r($result, true));
+
+            return $result;
+        }
+        return false;
     }
 }

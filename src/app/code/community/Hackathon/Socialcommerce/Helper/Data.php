@@ -34,6 +34,12 @@
  */
 class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    const XML_NODE_SERVICES      = 'global/socialcommerce/services';
+
+    public function isServiceEnabled($service)
+    {
+        return Mage::getStoreConfigFlag('socialcommerce/' . $service . '/active');
+    }
 
     public function getTwitterConsumerKey ()
     {
@@ -55,6 +61,11 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return Mage::helper('core')->decrypt(
                 Mage::getStoreConfig('socialcommerce/twitter/token_secret'));
+    }
+
+    public function isFacebookEnabled()
+    {
+        return $this->isServiceEnabled('facebook');
     }
 
     public function getFacebookAppId() {
@@ -83,7 +94,7 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     public function isTwitterEnabled() {
-        return Mage::getStoreConfigFlag('socialcommerce/twitter/active');
+        return $this->isServiceEnabled('twitter');
     }
 
     public function getDeliciousUsername() {
@@ -95,7 +106,26 @@ class Hackathon_Socialcommerce_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     public function isDeliciousEnabled() {
-        return Mage::getStoreConfigFlag('socialcommerce/delicious/active');
+        return $this->isServiceEnabled('delicious');
+    }
+
+    /**
+     * Get available social services
+     *
+     * @return array
+     */
+    public function getAvailableServices()
+    {
+        $enabledServices = array();
+        $services = (array) Mage::getConfig()->getNode(self::XML_NODE_SERVICES);
+
+        foreach ($services as $service) {
+            if ($this->isServiceEnabled($service->getName())) {
+                $enabledServices[] = $service->getName();
+            }
+        }
+
+        return $enabledServices;
     }
 
     /**

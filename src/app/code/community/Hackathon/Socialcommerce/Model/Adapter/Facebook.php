@@ -88,4 +88,9 @@ class Hackathon_Socialcommerce_Model_Adapter_Facebook extends Hackathon_Socialco
 
         return $this->_client;
     }
+
+    public function getUserProfile($id = null)
+    {
+        // @TODO TO implement
+    }
 }

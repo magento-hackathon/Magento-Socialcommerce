@@ -104,4 +104,34 @@ class Hackathon_Socialcommerce_Model_Observer extends Hackathon_Socialcommerce_M
         $twitter = Mage::getModel('socialcommerce/adapter_twitter');
         $twitter->sendSinglePost($post);
     }
+
+    /**
+     * Event:
+     * - core_block_abstract_prepare_layout_after
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    public function insertPostSocialButton (Varien_Event_Observer $observer)
+    {
+        /* @var $block Mage_Adminhtml_Block_Catalog_Product_Edit */
+        $block = $observer->getEvent()->getBlock();
+
+        if ($block->getId() == 'product_edit' && $block->getChild('save_button')) {
+
+            $child = $block->getChild('save_button');
+            $afterHtml = $child->getAfterHtml();
+
+            $socialHtml = $child->getLayout()->createBlock('socialcommerce/adminhtml_button', 'post_social')
+                ->setData(array(
+                    'label'     => Mage::helper('socialcommerce')->__('Save & Post to Social'),
+                    'onclick'   => '',
+                    'class' => 'save'
+                ))
+                ->toHtml();
+
+            $socialButtonsHtml = '<div id="container-socialbuttons">' . $socialHtml . '</div>';
+
+            $child->setAfterHtml($afterHtml . $socialButtonsHtml);
+        }
+    }
 }
